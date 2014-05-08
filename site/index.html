@@ -2,9 +2,69 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="style/style.css">
+	<link rel="stylesheet" type="text/css" href="style/typography.css">
+	<link rel="stylesheet" type="text/css" href="style/button.css">
 	<title>The Freediver's Trainer</title>
+
+	<script>
+		var HTML = "";
+		function someThingChanged(){
+			if(document.getElementById("CO2Radio").checked){
+				document.getElementById("staticTable1").innerHTML = HTML;
+				initCO2();
+			}
+			else if(document.getElementById("O2Radio").checked){
+				document.getElementById("staticTable1").innerHTML = HTML;
+				initO2();
+			}
+			else{
+				HTML = document.getElementById("staticTable1").innerHTML; //save state
+				initCustom();
+			}
+		}
+	</script>
+
 </head>
-<body>
-	<img src="http://www.askaboutrisk.com/mediawiki/images/4/44/UnderConstruction.png">
+<body text-align="center">
+	<h1>The freediver's Trainer</h1>
+	<h4>Your maximum breathhold time:</h4>
+	<label id="pickerTimeLabel" class="timeLabel">2:00</label> 
+	<input type="range" step = "0.25" name="time" min="0" max="10" value="2" onchange="someThingChanged()" ><br>
+
+	<div id="radioAndButtonContainer">
+		<div id="radioDiv">
+			<h4 id="radioLabels"><input id="CO2Radio" type="radio" name="radio" onchange="someThingChanged()" value="CO2"> 
+				CO<sub>2</sub> Deprivation
+			<br><input id="O2Radio" type="radio" name="radio" onchange="someThingChanged()" value="O2" > O<sub>2</sub> Tolerance 
+			<br><input id="customRadio" type="radio" name="radio" onchange="someThingChanged()" value="O2" > Create custom table </h4>
+		</div>
+	<button id="startButton" onclick="startSession()">Start Session</button>
+
+	</div>
+
+	<div id="staticTable1" >
+
+		<div class="tableTitle">Breathe</div>
+		<div class="tableTitle">Hold</div><br>
+		<div class="tableElement timeLabel breathe"></div>
+		<div class="tableElement timeLabel hold"></div><br>
+		<div class="tableElement timeLabel breathe"></div>
+		<div class="tableElement timeLabel hold"></div><br>
+		<div class="tableElement timeLabel breathe"></div>
+		<div class="tableElement timeLabel hold"></div><br>
+		<div class="tableElement timeLabel breathe"></div>
+		<div class="tableElement timeLabel hold"></div><br>
+		<div class="tableElement timeLabel breathe"></div>
+		<div class="tableElement timeLabel hold"></div><br>
+		<div class="tableElement timeLabel breathe"></div>
+		<div class="tableElement timeLabel hold"></div><br>
+		<div class="tableElement timeLabel breathe"></div>
+		<div class="tableElement timeLabel hold"></div><br>
+		<div class="tableElement timeLabel breathe"></div>
+		<div class="tableElement timeLabel hold"></div><br>
+	</div>
 </body>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script type="text/javascript" src="script/Stopwatch.js"></script>
+	<script type="text/javascript" src="script/script.js"></script>
 </html>
