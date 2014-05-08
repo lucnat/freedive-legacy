@@ -5,9 +5,8 @@ input.value = 2	//default
 initCO2();
 document.getElementById("CO2Radio").checked = true;
 
-
 function initCO2(){
-
+	console.log("initCO2 called");
 	var elems = document.getElementsByClassName("tableElement");
 	var n = elems.length;
 	var input = document.getElementsByTagName("input")[0];
@@ -30,10 +29,12 @@ function initCO2(){
 	}
 
 	for(var i=0; i<n; i++) elems[i].innerHTML = transformTime(tableTimes[i]*1000*60);
+	console.log("HTML of CO2 set.");
 }
 
 function initO2(){
 
+	console.log("initO2 called");
 	var elems = document.getElementsByClassName("tableElement");
 	var n = elems.length;
 	var input = document.getElementsByTagName("input")[0];
@@ -64,16 +65,29 @@ function initO2(){
 		tableTimes[i] = tableTimes[i]/60;
 		elems[i].innerHTML = transformTime(tableTimes[i]*1000*60);
 	}
+	console.log("HTML of O2 set.");
 }
 
 function initCustom(){
-	var HTML = "<button id='addButton' onclick='addColumn()'>+</button>";
-	document.getElementById("staticTable1").innerHTML = HTML;
+	console.log("initCustom called");
+	var titles = '<div class="tableTitle">Breathe</div> <div class="tableTitle">Hold</div><br>'
+	var addButton = "<button id='addButton' onclick='addColumn()'>+ </button> Column";
+	document.getElementById("staticTable1").innerHTML = titles + addButton;
 }
 
-function addColumn(){
+var n=1;
+
+function addColumn(){	
+	var titles = '<div class="tableTitle">Breathe</div> <div class="tableTitle">Hold</div><br>'
 	var column = '<div class="tableElement timeLabel breathe"></div> <div class="tableElement timeLabel hold"></div><br>';
-	document.getElementById("staticTable1").innerHTML += column;
+	var addButton = "<button id='addButton' onclick='addColumn()'>+ </button>Column";
+
+	var HTML = titles;
+	for(var i=0; i<n; i++) 
+		HTML += column;
+	HTML += addButton;
+	document.getElementById("staticTable1").innerHTML = HTML;
+	n++
 }
 
 function startSession(){
