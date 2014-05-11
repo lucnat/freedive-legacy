@@ -7,13 +7,14 @@ function transformTime(clock){
 	return "" + Math.round(clock/1000/60-0.5) + ":" +pad(Math.round(clock/1000%60-0.5),2); 
 }
 
+
 var Stopwatch = function(elem, startingTime, options){
 	var timer       = createTimer(),
 		offset,
 		clock,
 		interval,
-    	next;
-
+    	next,
+    	running;
 
 	// default options
 	options = options || {};
@@ -41,6 +42,7 @@ var Stopwatch = function(elem, startingTime, options){
 	}
 
 	function start() {
+		running = true;
 		if (!interval) {
 			offset   = Date.now();
 			interval = setInterval(update, options.delay);
@@ -56,6 +58,7 @@ var Stopwatch = function(elem, startingTime, options){
 
 	function reset() {
 		clock = startingTime;
+		running = false;
 		render();
 	}
 
@@ -64,6 +67,7 @@ var Stopwatch = function(elem, startingTime, options){
 			clock -= delta();
 		else{
 			clock = 0;
+			running = false;
 			stop();
 			if(next) {
 				next.start();
@@ -76,7 +80,6 @@ var Stopwatch = function(elem, startingTime, options){
 		if(clock > 0){
 			elem.innerHTML = transformTime(clock);			
 		}
-
 	}
 
 	function delta() {
@@ -97,6 +100,10 @@ var Stopwatch = function(elem, startingTime, options){
 
 	this.setNext = function(nextStopwatch){
 	next = nextStopwatch;
+	}
+
+	this.isRunning = function(){
+		return running;
 	}
 
 }

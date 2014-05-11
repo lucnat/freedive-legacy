@@ -18,7 +18,7 @@ button {
 }
 
 #startButton{
-  margin: 50px;
+  margin: 50px 0px;
 }
 
 #addButton{
@@ -72,8 +72,13 @@ input[type='range']::-moz-range-thumb {
 }
 
 
-input[type=radio] {  
-    width: 20px;
+#rangeTop{  
+    width: 400px;
+    height: 20px;
+}
+
+#rangeCustom{  
+    width: 150px;
     height: 20px;
 }  
 
