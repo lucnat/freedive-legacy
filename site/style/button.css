@@ -1,38 +1,22 @@
-button {
-  display: inline;
-  background: #3498db;
-  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
-  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
-  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
-  background-image: -o-linear-gradient(top, #3498db, #2980b9);
-  background-image: linear-gradient(to bottom, #3498db, #2980b9);
-  -webkit-border-radius: 28;
-  -moz-border-radius: 28;
-  border-radius: 28px;
-  text-shadow: 1px 1px 3px #666666;
-  font-family: Georgia;
-  color: #ffffff;
-  font-size: 25px;
-  padding: 10px 20px 10px 20px;
+button{
+  border: 0;
+  margin: 0;
+  border-radius: 10px;
+  background: #FFF;
   text-decoration: none;
+  padding: 10px 20px;
 }
 
-#startButton{
-  margin: 50px 0px;
+#buttonContainer{
+  margin-top: 10px;
 }
 
-#addButton{
-    background: green;
-
+li,button,a,input,.pointer{
+  cursor: pointer;
 }
 
 button:hover {
-  background: #3cb0fd;
-  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  background: #E0EDFF;
   text-decoration: none;
 }
 
@@ -41,8 +25,6 @@ input[type='range'] {
   border-radius: 5px;
   box-shadow: inset 0 0 5px #333;
   background-color: #999;
-  height: 10px;
-  width: 600px;
   vertical-align: middle;
 }
 input[type='range']::-moz-range-track {
@@ -74,11 +56,46 @@ input[type='range']::-moz-range-thumb {
 
 #rangeTop{  
     width: 400px;
-    height: 20px;
+    height: 15px;
 }
 
-#rangeCustom{  
+.rangeCustom{  
     width: 150px;
     height: 20px;
-}  
+} 
 
+#addButton{
+    background: green;
+    margin-top: 30px;
+}
+
+#removeButton{
+    background: red;
+    margin-top: 20px;
+}
+
+.bottomButton  {
+    background: #4bd628;
+    background-image: -webkit-linear-gradient(top, #4bd628, #339410);
+    background-image: -moz-linear-gradient(top, #4bd628, #339410);
+    background-image: -ms-linear-gradient(top, #4bd628, #339410);
+    background-image: -o-linear-gradient(top, #4bd628, #339410);
+    background-image: linear-gradient(to bottom, #4bd628, #339410);
+    -webkit-border-radius: 28;
+    -moz-border-radius: 28;
+    border-radius: 28px;
+    font-family: Georgia;
+    color: #ffffff;
+    font-size: 25px;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+}
+
+#addButton:hover {
+    background: #78c75e;
+    text-decoration: none;
+}
+#removeButton:hover {
+    background: #FF9494;
+    text-decoration: none;
+}

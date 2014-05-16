@@ -1,3 +1,8 @@
+var breathSound = new Audio(); 		breathSound.src="sounds/breathe.mp3"; 		breathSound.volume = 0.7;
+var holdSound = new Audio(); 		holdSound.src="sounds/hold.mp3";			holdSound.volume = 0.7;
+var tenSeconds = new Audio(); 		tenSeconds.src="sounds/10seconds.mp3";		tenSeconds.volume = 0.7;
+var thirtySeconds = new Audio(); 	thirtySeconds.src="sounds/30seconds.mp3";	thirtySeconds.volume = 0.7;
+
 function transformTime(clock){
 	function pad(num, size) {
 		var s = num+"";
@@ -8,19 +13,25 @@ function transformTime(clock){
 }
 
 
+function hasClass(element, cls) {
+	//return true, if element contains class "cls" and false otherwise
+    return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
+}
+
+
 var Stopwatch = function(elem, startingTime, options){
 	var timer       = createTimer(),
 		offset,
 		clock,
 		interval,
     	next,
-    	running;
+    	running,
+    	tenSecondsPlayed = startingTime < 10000,
+    	thirtySecondsPlayed = startingTime < 30000;
 
 	// default options
 	options = options || {};
 	options.delay = options.delay || 1;
-
-	//elem.appendChild(timer);
 
 	// initialize
 	reset();
@@ -42,6 +53,13 @@ var Stopwatch = function(elem, startingTime, options){
 	}
 
 	function start() {
+
+		//which sound to play? check element!
+		if (hasClass(elem, "breathe"))
+			breathSound.play();
+		else
+			holdSound.play();
+
 		running = true;
 		if (!interval) {
 			offset   = Date.now();
@@ -61,15 +79,32 @@ var Stopwatch = function(elem, startingTime, options){
 		running = false;
 		render();
 	}
+	
+	function playRemainingSoundsIfNeeded(){
+		if(!thirtySecondsPlayed && clock < 30000){
+			thirtySeconds.play();
+			thirtySecondsPlayed = true;
+		}
+		if(!tenSecondsPlayed && clock < 10000){
+			tenSeconds.play();
+			tenSecondsPlayed = true;
+		}
+
+	}
 
 	function update() {
-		if(clock > 0)
+
+		if(clock > 0){
+			playRemainingSoundsIfNeeded();
 			clock -= delta();
+		}
 		else{
 			clock = 0;
+			render();
 			running = false;
 			stop();
 			if(next) {
+				breathing = !breathing;
 				next.start();
 			}
 		}
@@ -89,15 +124,17 @@ var Stopwatch = function(elem, startingTime, options){
 		return d;
 	}
 
-	this.toString = function(){
-		return "Stopwatch with starting Time " + startingTime;
+	this.log = function(){
+		console.log("started at " + startingTime + " in element ");
+		console.log(elem);
+		console.log("next: starts at " + startingTime + " in element ")
+		console.log(next.elem);
 	}
 
 	// public API
 	this.start  = start;
 	this.stop   = stop;
 	this.reset  = reset;
-
 	this.setNext = function(nextStopwatch){
 	next = nextStopwatch;
 	}

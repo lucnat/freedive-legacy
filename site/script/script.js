@@ -1,136 +1,133 @@
-//globas variables
-var input = document.getElementsByTagName("input")[0];
+//globas variables, they describe the whole state of the application
+var sessionState = "stopped"; //running, paused and stopped are possible values
+var breathing = true; //if breath stopwatch is running its true and otherwise false
+var	stopwatch = [];
 var tableTimes = [];
 var customRowNumber=1;
-var	stopwatch = [];
+HTML = get("table").innerHTML;
 
 
-//default settings
-input.value = 2
-initCO2();
-HTML = document.getElementById("staticTable1").innerHTML;
-document.getElementById("CO2Radio").checked = true;
+if(!localStorage.getItem("hasBeenHere")){
+	//default settings
+	localStorage.setItem("maxTime", 2);
+	localStorage.setItem("mode", 1);
 
-function initCO2(){
+	get("rangeTop").value = 2
+	get("CO2Radio").checked = true;
+	loadLocal();
+	localStorage.setItem("hasBeenHere",true);
+}
+else{
+	loadLocal();
+}
+
+
+function startSession(arg){
+	sessionState = "running";
 	var elems = document.getElementsByClassName("tableElement");
 	var n = elems.length;
-	var input = document.getElementsByTagName("input")[0];
-	var maxTime = input.value;
-	
-	var maxTimeLabel = document.getElementById("pickerTimeLabel");
-	maxTimeLabel.innerHTML = transformTime(maxTime*60*1000);
+	if(n != tableTimes.length){
+		alert("Problem of Array lengths! \nArray: "+tableTimes.length + " \nElements: " + n);
 
-	var breathTime = 2.75;
-
-	for(var i=0; i<n; i++){
-		if(i%2==0){	//breath
-			breathTime -= 0.25;
-			if(breathTime < 1)
-				tableTimes[i] = 1;
-			else
-				tableTimes[i] = breathTime;
-		} //hold
-		else tableTimes[i] = maxTime/2; 
 	}
 
-	for(var i=0; i<n; i++) elems[i].innerHTML = transformTime(tableTimes[i]*1000*60);
-}
+	get("startButtonImage").src="images/pause.gif";
 
-function initO2(){
-
-	var elems = document.getElementsByClassName("tableElement");
-	var n = elems.length;
-	var input = document.getElementsByTagName("input")[0];
-	var maxTime = input.value*60;
-	
-	var maxTimeLabel = document.getElementById("pickerTimeLabel");
-	maxTimeLabel.innerHTML = transformTime(maxTime*1000);
-
-	var step = maxTime/12;
-	var lowerLimit = 4*step;
-	var upperLimit = maxTime-2*step;
-	var holdTime = lowerLimit
-
-	for(var i=0; i<n; i++){
-		if(i%2==0) //breath
-			tableTimes[i] = 2*60;
-		else{ //hold
-			if(holdTime < upperLimit){
-				tableTimes[i] = holdTime;
-			}
-			else tableTimes[i] = upperLimit;
-			holdTime += step;
-		} 
-	}
-
-	//war alles in Sekunden müssen in Minuten:
-	for(var i=0; i<n; i++) {
-		tableTimes[i] = tableTimes[i]/60;
-		elems[i].innerHTML = transformTime(tableTimes[i]*1000*60);
-	}
-}
-
-function initCustom(){
-	var titles = '<div class="tableTitle">Breathe</div> <div class="tableTitle">Hold</div><br>'
-	var addButton = "<button id='addButton' onclick='addColumn()'>+ </button> Column";
-	document.getElementById("staticTable1").innerHTML = titles + addButton;
-}
-
-function pausePressed(){
-	var button = document.getElementById("pauseButton");
-	var runningStopwatch = {};
-	for(var i=0; i<stopwatch.length; i++)
-		if(stopwatch[i].isRunning())
-			runningStopwatch = stopwatch[i];
-
-	if(button.innerHTML=="Pause"){
-		runningStopwatch.stop();
-		button.innerHTML="Resume";
-	}
-	else{
-		runningStopwatch.start();
-		button.innerHTML="Pause";
-	}
-}
-
-var onchange = {}
-function addColumn(){	
-	var labelString = "customLabel"+customRowNumber;
-	var titles = '<div class="tableTitle">Breathe</div> <div class="tableTitle">Hold</div><br>';
-	var timeLabel = '<label id='+labelString+' class="customTimeLabels timeLabel">2:00</label>';
-	var quote="'";
-	onchange = function(value){
-		document.getElementById(labelString).innerHTML=transformTime(value*60*100);
-	}
-	var input = ' <input id = "rangeCustom" type="range" step ="0.25" name="time" min="0" max="4" value="2" onchange="onchange(this.value);"></div>';
-	var breathElement = '<div class="tableElement breathe">'+timeLabel+input+'</div>';
-	var holdElement = '<div class="tableElement hold">'+timeLabel+input+'</div>';
-	var row = breathElement+holdElement+'<br>';
-	var addButton = "<button id='addButton' onclick='addColumn()'>+ </button> Add Column";
-
-	var HTML = titles;
-	for(var i=0; i<customRowNumber; i++) 
-		HTML += row;
-	HTML += addButton;
-	document.getElementById("staticTable1").innerHTML = HTML;
-	console.log(document.getElementById("rangeCustom"));
-	customRowNumber++;
-}
-
-
-function startSession(){
-	var elems = document.getElementsByClassName("tableElement");
-	var n = elems.length;
-	document.getElementById("pauseButton").innerHTML="Pause";
-
-
-	for(var i=0; i<n; i++) {
+	for(var i=0; i<n; i++)
 		stopwatch[i] = new Stopwatch(elems[i], tableTimes[i]*1000*60,{delay: 10});
-	}
-	for(var i=0; i<n-1; i++){
+	for(var i=0; i<n-1; i++)
 		stopwatch[i].setNext(stopwatch[i+1]);
-	}
 
 	stopwatch[0].start();
 }
 
+function pauseSession(){
+	sessionState = "paused";
+	get("startButtonImage").src="images/play.gif";
+
+	var runningStopwatch = {};
+	for(var i=0; i<stopwatch.length; i++)
+		if(stopwatch[i].isRunning())
+			runningStopwatch = stopwatch[i];
+	runningStopwatch.stop();
+}
+
+function continueSession(){
+	sessionState = "running";
+	get("startButtonImage").src="images/pause.gif";
+
+	for(var i=0; i<stopwatch.length; i++)
+		if(stopwatch[i].isRunning())
+			runningStopwatch = stopwatch[i];
+	runningStopwatch.start();
+}
+
+function onPlayButtonClicked(){
+	switch(sessionState) {
+		case "stopped":
+		    startSession();
+		    break;
+		case "running":
+		    pauseSession();
+		    break;
+		default:
+		    continueSession();
+		}
+}
+
+function stopSession(){
+	get("startButtonImage").src="images/play.gif";
+	sessionState = "stopped";
+
+	for(var i=0; i<stopwatch.length; i++){
+		stopwatch[i].stop();
+		stopwatch[i].reset();
+	}
+}
+
+function saveLocal(lastModeSelected){
+	localStorage.setItem("maxTime", get("rangeTop").value);
+	localStorage.setItem("mode", lastModeSelected);
+	localStorage.setItem("customRowNumber",customRowNumber);
+
+	/* I have to do this (save custom table)
+	if(lastModeSelected == 3){
+		//means we are in custom mode, so we have to save the tableTimes as well
+		var timesInStoreFormat = [];
+		for(var i=0; i<tableTimes.length; i++)
+			timesInStoreFormat[i] = tableTimes[i]*60*1000;
+		localStorage.setItem("tableTimes",JSON.stringify(timesInStoreFormat));
+	}
+	*/
+}
+
+function loadLocal(){
+	var maxTime = localStorage.getItem("maxTime");
+	get("rangeTop").value = maxTime;
+	get("pickerTimeLabel").innerHTML = transformTime(maxTime*60*1000);
+
+	//var loadedTimes = JSON.parse(localStorage.getItem("tableTimes"));
+
+	var mode = localStorage.getItem("mode");
+	if(mode == 1){
+		get("CO2Radio").checked = true;
+		initCO2();
+	}
+	else if(mode == 2){
+		get("O2Radio").checked = true;
+		initO2();
+	}
+	else{
+		initCustom();
+		/*
+		get("customRadio").checked = true;
+		customRowNumber = localStorage.getItem("customRowNumber");
+		initCustom(loadedTimes);
+		*/
+	}
+}
+
+function updateMaxTimeLabel(){
+	var maxTime = get("rangeTop").value;
+	get("pickerTimeLabel").innerHTML = transformTime(maxTime*60*1000);
+}

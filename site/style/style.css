@@ -7,7 +7,7 @@ body{
 	width: 350px;
 	height: 50px;
 	margin: 0 auto;
-	border: 10px solid white;
+	border: 5px solid #E0EDFF;
 	border-radius: 50px;
 }
 
@@ -21,22 +21,50 @@ body{
 }
 
 
-#staticTable1{
+#table{
+	
+}
+
+#tableContainer{
+	padding: 10px;
+	border-radius: 10px;
+  	background: #E0EDFF;
 	width: 700px;
 	margin: 0 auto;
-	font-size: 5px;
+	margin-top: 10px;
+	font-size: 2px;
+}
+
+#options{
+  	background: #E0EDFF;
+	border-radius: 10px;
+	height: 100px;
+	width: 800px;
+	margin: 0 auto;
+	position: relative;
+	text-align: left;
+	padding: 10px 0px 25px 50px ;
 }
 
 #radioDiv{
 	margin-top: 10px;
 	margin-left: 50px;
-	float: left;
-	width: 300px;
+	float: right;
+	width: 250px;
 	text-align: left;
 }
+
+#rangeTopContainer{
+	float: left;
+}
+
+#maximumTimeText{
+	margin-bottom: 100px;
+}
+
 #radioAndButtonContainer{
-	width: 700px;
-	margin: 0 auto;
+	width: 200px;
+	float: right;
 }
 
 footer{
