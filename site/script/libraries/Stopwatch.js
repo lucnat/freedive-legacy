@@ -81,11 +81,11 @@ var Stopwatch = function(elem, startingTime, options){
 	}
 	
 	function playRemainingSoundsIfNeeded(){
-		if(!thirtySecondsPlayed && clock < 30000){
+		if(!thirtySecondsPlayed && clock < 31000){
 			thirtySeconds.play();
 			thirtySecondsPlayed = true;
 		}
-		if(!tenSecondsPlayed && clock < 10000){
+		if(!tenSecondsPlayed && clock < 11000){
 			tenSeconds.play();
 			tenSecondsPlayed = true;
 		}

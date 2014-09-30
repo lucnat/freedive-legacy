@@ -1,4 +1,4 @@
-# Breathhold training for freedivers
+# Breathhold training for freediver
   
   The goal of this project is to create a free, simple to use, online breathhold trainer for freedivers.
   The application will be built using web technologies such as javascript, CSS3, and HTML5.

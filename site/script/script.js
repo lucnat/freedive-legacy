@@ -3,9 +3,8 @@ var sessionState = "stopped"; //running, paused and stopped are possible values
 var breathing = true; //if breath stopwatch is running its true and otherwise false
 var	stopwatch = [];
 var tableTimes = [];
-var customRowNumber=1;
-HTML = get("table").innerHTML;
-
+var customTableTimes = [];
+get("table").innerHTML = normalHTML; //initialize
 
 if(!localStorage.getItem("hasBeenHere")){
 	//default settings
@@ -20,7 +19,6 @@ if(!localStorage.getItem("hasBeenHere")){
 else{
 	loadLocal();
 }
-
 
 function startSession(arg){
 	sessionState = "running";
@@ -88,17 +86,15 @@ function stopSession(){
 function saveLocal(lastModeSelected){
 	localStorage.setItem("maxTime", get("rangeTop").value);
 	localStorage.setItem("mode", lastModeSelected);
-	localStorage.setItem("customRowNumber",customRowNumber);
+	localStorage.setItem("customRowNumber",tableTimes.length/2);
 
-	/* I have to do this (save custom table)
+	//I have to do this (save custom table)
 	if(lastModeSelected == 3){
+		log("we need to safe the custom array now. is as follows: ");
+		log(tableTimes);
 		//means we are in custom mode, so we have to save the tableTimes as well
-		var timesInStoreFormat = [];
-		for(var i=0; i<tableTimes.length; i++)
-			timesInStoreFormat[i] = tableTimes[i]*60*1000;
-		localStorage.setItem("tableTimes",JSON.stringify(timesInStoreFormat));
+		localStorage.setItem("tableTimes",JSON.stringify(tableTimes));
 	}
-	*/
 }
 
 function loadLocal(){
@@ -106,7 +102,6 @@ function loadLocal(){
 	get("rangeTop").value = maxTime;
 	get("pickerTimeLabel").innerHTML = transformTime(maxTime*60*1000);
 
-	//var loadedTimes = JSON.parse(localStorage.getItem("tableTimes"));
 
 	var mode = localStorage.getItem("mode");
 	if(mode == 1){
@@ -118,12 +113,9 @@ function loadLocal(){
 		initO2();
 	}
 	else{
-		initCustom();
-		/*
 		get("customRadio").checked = true;
-		customRowNumber = localStorage.getItem("customRowNumber");
-		initCustom(loadedTimes);
-		*/
+		var loadedTimes = JSON.parse(localStorage.getItem("tableTimes"));
+		initCustom(loadedTimes);		
 	}
 }
 

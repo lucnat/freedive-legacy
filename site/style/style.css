@@ -2,6 +2,20 @@ body{
 	text-align: center;  
 }
 
+.menuItem{
+	padding: 10px 10px;
+	margin: 10px 10px;
+	border-radius: 10px;
+}
+.menuItem:hover {
+  background: #E0EDFF;
+  text-decoration: none;
+}
+
+.inline{
+	display: inline-block;
+}
+
 .tableElement{
 	text-align: center;
 	width: 350px;
@@ -20,7 +34,9 @@ body{
 	padding: 0px 50px;
 }
 
-
+#HCB_comment_box{
+	width: 800px;
+}
 #table{
 	
 }

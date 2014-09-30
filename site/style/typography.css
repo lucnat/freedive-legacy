@@ -1,8 +1,12 @@
 body{
 	font-family: Georgia;
-	font-size: 25px;
+	font-size: 13px;
 	color: #555;
 	background-color: #fff;
+}
+
+a{
+	text-decoration: none;
 }
 
 label{
@@ -12,7 +16,7 @@ label{
 }
 
 h1{
-	margin-top: 20px;
+	margin: 20px 0px 0px 0px;
 }
 
 h4{
@@ -21,6 +25,20 @@ h4{
 
 p{
 	font-size: 15px;
+}
+
+footer{
+	text-align: center;
+}
+
+#menu{
+	margin: 10px;
+	font-family: Georgia;
+	font-size: 25px;
+	color: #555;
+
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
 }
 
 #radioLabels{

@@ -1,4 +1,5 @@
 function initCustom(loadedTableTimes){
+	tableTimes = [];
 	var table = get("table");
 	table.innerHTML = "";
 	updateMaxTimeLabel();
@@ -9,20 +10,18 @@ function initCustom(loadedTableTimes){
 
 	if(loadedTableTimes){
 		tableTimes = loadedTableTimes;
-		rowsToAdd = customRowNumber-1;
-		customRowNumber = 1;
+		rowsToAdd = localStorage.getItem("customRowNumber")-1;
 		for(var i=0; i<rowsToAdd; i++){
-			addRow(tableTimes[2*i],tableTimes[2*i+1]);
-			log("addRow called");
+			addRow(i+1,tableTimes[2*i],tableTimes[2*i+1]);
 		}
 	}
 	else{
-		customRowNumber = 1;
 		tableTimes = [];
 
 		for(var i=0; i<6; i++)
-			addRow();
+			addRow(i+1);
 	}
+	saveLocal(3);
 }
 
 function onCustomRangeChanged(event){
@@ -42,17 +41,22 @@ function onCustomRangeChanged(event){
 		holdTimeLabel.innerHTML = transformTime(event.value*60*1000);
 		tableTimes[tableId] = newValue;
 	}
+
+	saveLocal(3);
+
 }
 
-function addRow(breathTime, holdTime){	
+function addRow(row, breathTime, holdTime){	
 
+	var customRowNumber = localStorage.getItem("customRowNumber");
+	if(row)
+		customRowNumber = row;
 	var breathLabelId = "breathTimeLabel"+customRowNumber;
 	var breathInputId = ""+customRowNumber
 	var breathLabel = "";
 
-	console.log("passed breathTtime " + breathTime + " and holdTime " + holdTime);
 	if(breathTime)
-		breathLabel += transformTime(breathTime);
+		breathLabel += transformTime(breathTime*60*1000);
 	else
 		breathLabel = "2:00"
 	var breatheTimeLabel = dom("LABEL", {
@@ -79,7 +83,7 @@ function addRow(breathTime, holdTime){
 	var holdInputId = customRowNumber+100+ ""
 	var holdLabel = "";
 	if(holdTime)
-		holdLabel +=transformTime(breathTime);
+		holdLabel +=transformTime(holdTime*60*1000);
 	else
 		holdLabel = "2:00"
 
@@ -110,18 +114,19 @@ function addRow(breathTime, holdTime){
 
 	tableTimes[2*customRowNumber-2] = 2;
 	tableTimes[2*customRowNumber-1] = 2;
-	customRowNumber++;
+	localStorage.setItem("customRowNumber",customRowNumber+1);
 	saveLocal(3);
 }
 
 function removeRow(){
-	if(customRowNumber > 1){
-		get("row"+(customRowNumber-1)).remove();
+	var lastRow = localStorage.getItem("customRowNumber");
+	if(lastRow > 1){
+		get("row"+(lastRow-1)).remove();
 		tableTimes.pop();
 		tableTimes.pop();
-		customRowNumber -= 1;
+		localStorage.setItem("customRowNumber", lastRow-1);
 
-		saveLocal();
+		saveLocal(3);
 	}
 	else
 		alert("All rows have already been removed.");

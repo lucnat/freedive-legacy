@@ -6,28 +6,31 @@
 	<link rel="stylesheet" type="text/css" href="style/typography.css">
 	<link rel="stylesheet" type="text/css" href="style/button.css">
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.css" />
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script>
 	<script type="text/javascript" src="script/libraries/Stopwatch.js"></script>
-	<script type="text/javascript" src="script/libraries/dom.js"></script>
+	<script type="text/javascript" src="script/libraries/luc.js"></script>
 
 	<title>The Freediver's Trainer</title>
 
+
 	<script>
-		var HTML = "";
+		var	normalHTML = ' <div class="tableTitle">Breathe</div> <div class="tableTitle">Hold</div><br> <div class="tableElement timeLabel breathe"></div> <div class="tableElement timeLabel hold"></div><br> <div class="tableElement timeLabel breathe"></div> <div class="tableElement timeLabel hold"></div><br> <div class="tableElement timeLabel breathe"></div> <div class="tableElement timeLabel hold"></div><br> <div class="tableElement timeLabel breathe"></div> <div class="tableElement timeLabel hold"></div><br> <div class="tableElement timeLabel breathe"></div> <div class="tableElement timeLabel hold"></div><br> <div class="tableElement timeLabel breathe"></div> <div class="tableElement timeLabel hold"></div><br> <div class="tableElement timeLabel breathe"></div> <div class="tableElement timeLabel hold"></div><br> <div class="tableElement timeLabel breathe"></div> <div class="tableElement timeLabel hold"></div><br> ';
+
 		function someThingChanged(){
 
 			stopSession();
 			
 			if(get("CO2Radio").checked){
-				get("table").innerHTML = HTML;
+				get("table").innerHTML = normalHTML;
 				saveLocal(1);
 			}
 			else if(get("O2Radio").checked){
-				get("table").innerHTML = HTML;
+				get("table").innerHTML = normalHTML;
 				saveLocal(2);
 			}
 			else{
-				HTML = get("table").innerHTML; //save state
 				saveLocal(3);
 			}
 			loadLocal();
@@ -37,6 +40,11 @@
 </head>
 <body text-align="center">
 	<h1>The freediver's Trainer</h1>
+	<div id="menu">
+		<div class="inline menuItem"><a href="#">Trainer App </a></div>
+		<div class="inline menuItem"><a href="#">How does it work? </a></div>
+		<div class="inline menuItem"><a href="#">About </a></div>
+	</div>
 	<div id="options">
 
 		<div id = "rangeTopContainer">
@@ -65,33 +73,20 @@
 	<div id="tableContainer">
 		<div id="table" >
 
-			<div class="tableTitle">Breathe</div>
-			<div class="tableTitle">Hold</div><br>
-			<div class="tableElement timeLabel breathe"></div>
-			<div class="tableElement timeLabel hold"></div><br>
-			<div class="tableElement timeLabel breathe"></div>
-			<div class="tableElement timeLabel hold"></div><br>
-			<div class="tableElement timeLabel breathe"></div>
-			<div class="tableElement timeLabel hold"></div><br>
-			<div class="tableElement timeLabel breathe"></div>
-			<div class="tableElement timeLabel hold"></div><br>
-			<div class="tableElement timeLabel breathe"></div>
-			<div class="tableElement timeLabel hold"></div><br>
-			<div class="tableElement timeLabel breathe"></div>
-			<div class="tableElement timeLabel hold"></div><br>
-			<div class="tableElement timeLabel breathe"></div>
-			<div class="tableElement timeLabel hold"></div><br>
-			<div class="tableElement timeLabel breathe"></div>
-			<div class="tableElement timeLabel hold"></div><br>
-
 		</div>
 		<div id="addRemoveContainer">
 			<button id="addButton" class="bottomButton" onclick="addRow()">+ Add Row</button><br>
 			<button id="removeButton" class="bottomButton" onclick="removeRow()">- Remove Row</button>
 		</div>
 	</div>
+	
 
-	<footer><br></footer>
+	<footer>	<!-- begin htmlcommentbox.com -->
+		 <div id="HCB_comment_box"><a href="http://www.htmlcommentbox.com">HTML Comment Box</a> is loading comments...</div>
+		 <link rel="stylesheet" type="text/css" href="//www.htmlcommentbox.com/static/skins/bootstrap/twitter-bootstrap.css?v=0" />
+		 <script type="text/javascript" id="hcb"> /*<!--*/ if(!window.hcb_user){hcb_user={};} (function(){var s=document.createElement("script"), l=(""+window.location).replace(/'/g,"%27") || hcb_user.PAGE, h="//www.htmlcommentbox.com";s.setAttribute("type","text/javascript");s.setAttribute("src", h+"/jread?page="+encodeURIComponent(l).replace("+","%2B")+"&opts=16862&num=10");if (typeof s!="undefined") document.getElementsByTagName("head")[0].appendChild(s);})(); /*-->*/ </script>
+		<!-- end htmlcommentbox.com -->
+	</footer>
 </body>
 	<script type="text/javascript" src="script/O2.js"></script>
 	<script type="text/javascript" src="script/CO2.js"></script>
