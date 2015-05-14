@@ -3,6 +3,12 @@
 	{{#contentFor "headerTitle"}}
   		<h1 class="title">Configure</h1>
 	{{/contentFor}}
+	
+	{{#contentFor "headerButtonRight"}}
+		<button class="button button-clear pull-right">
+			{{> atNavButton}}
+		</button>
+	{{/contentFor}}
 
 	<div style='text-align: center'>
 		<p> </p>
@@ -19,10 +25,10 @@
 
 		{{#if currentUser.profile.CO2Mode}}	
 			<p>You are currently in CO2 Tolerance mode.</p>
-			<button id='changeforward' class='button button-outline button-calm'>Change to O2 deprivation</button>
+			<button id='changeforward' class='button button-dark'>Change to O2 deprivation</button>
 		{{else}}
 			<p>You are currently in O2 Deprivation mode.</p>
-			<button id='changebackward' class='button button-outline button-calm'>Change to CO2 deprivation</button>
+			<button id='changebackward' class='button button-dark'>Change to CO2 deprivation</button>
 		{{/if}}
 		<br><br>
 		<p>Read more about both modes <a id='readmore' data-ion-modal="readmore" href="#">here</a> </p>
