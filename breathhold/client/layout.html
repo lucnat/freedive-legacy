@@ -1,0 +1,31 @@
+<template name="layout">
+	<div id="container">
+		{{#ionBody}}
+
+			{{> ionNavBar class="bar-calm"}}
+
+			{{#contentFor "headerTitle"}}
+				<h1 class="title">Breathhold</h1>
+			{{/contentFor}}
+			{{#contentFor "headerButtonRight"}}
+				<button class="button button-clear pull-right">
+					{{> atNavButton}}
+				</button>
+			{{/contentFor}}
+
+			{{#ionContent class="padding"}}
+				{{> yield}}
+			{{/ionContent}}
+
+			{{#if currentUser}}
+				{{#ionTabs style="ios" class='tabs-calm'}}
+					{{> ionTab title="Exercise" path="exercise" iconOff="flash" iconOn="flash" class="tab-item-dark"}}
+					{{> ionTab title="Configure" path="configure" iconOff="gear-a" iconOn="gear-a" class="tab-item-dark"}}
+					{{> ionTab title="Profile" path="profile" iconOff="person" iconOn="person" class="tab-item-dark"}}
+				{{/ionTabs}}
+			{{/if}}
+
+		{{/ionBody}}
+	</div>
+</template>
+

@@ -1,0 +1,42 @@
+<template name="configure">
+
+	{{#contentFor "headerTitle"}}
+  		<h1 class="title">Configure</h1>
+	{{/contentFor}}
+
+	<div style='text-align: center'>
+		<p> </p>
+		<h3> Maximum breachhold time</h3>
+		{{#ionList}}	
+
+		  <div class="item range range-positive">
+		    <p style='font-size: 20px'>{{maxTime}}</p>
+		    <input id='maxTime' type="range" name="volume" min="2" max="48" value="0">
+		  </div>
+		{{/ionList}}
+		<br>
+		<h3> Training mode </h3>
+
+		{{#if currentUser.profile.CO2Mode}}	
+			<p>You are currently in CO2 Tolerance mode.</p>
+			<button id='changeforward' class='button button-outline button-calm'>Change to O2 deprivation</button>
+		{{else}}
+			<p>You are currently in O2 Deprivation mode.</p>
+			<button id='changebackward' class='button button-outline button-calm'>Change to CO2 deprivation</button>
+		{{/if}}
+		<br><br>
+		<p>Read more about both modes <a id='readmore' data-ion-modal="readmore" href="#">here</a> </p>
+	</div>
+
+</template>
+
+
+<template name="readmore">
+	{{#ionModal title="CO2 tolerance / O2 deprivation"}}
+		<div class="padding">
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco</p>
+		</div>
+	{{/ionModal}}
+</template>

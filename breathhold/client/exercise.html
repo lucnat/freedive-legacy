@@ -1,0 +1,29 @@
+<template name="exercise">
+	{{#contentFor "headerTitle"}}
+  		<h1 class="title">Exercise</h1>
+	{{/contentFor}}
+
+	 <div style='text-align: center'>
+		<div class='button-bar'>
+			<button id='start' class='button button-outline button-balanced icon-left ion-play'>Start</button>
+			<button id='pause' class='button  button-outline button-energized icon-left ion-pause' style='display:none'>Pause</button>
+			<button id='stop' class='button  button-outline button-assertive icon-left ion-stop'>Stop</button>
+		</div>
+	</div>
+	<div class="row" style='text-align:center'>
+		<div class="col"><h2>Breathe</h2></div>
+		<div class="col"><h2>Hold</h2></div>
+	</div>
+	{{#each rows}}
+		{{> row}}
+	{{/each}}
+</template>
+
+<template name="row">
+	<div class="row" style='text-align:center'>
+		<div class="col" style='font-size: 20px'>{{breathe}}</div>
+		<div class="col" style='font-size: 20px'>{{hold}}</div>
+	</div>
+</template>
+
+
