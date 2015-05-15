@@ -9,40 +9,78 @@
 			{{> atNavButton}}
 		</button>
 	{{/contentFor}}
+	<h3> Maximum breath hold time</h3>
+	{{#ionList}}
+		<div class="item range range-positive">
+			<p style='font-size: 20px'>{{maxTime}}</p>
+			<input id='maxTime' type="range" name="volume" min="2" max="48" value="0">
+		</div>
 
-	<div style='text-align: center'>
-		<p> </p>
-		<h3> Maximum breachhold time</h3>
-		{{#ionList}}	
-
-		  <div class="item range range-positive">
-		    <p style='font-size: 20px'>{{maxTime}}</p>
-		    <input id='maxTime' type="range" name="volume" min="2" max="48" value="0">
-		  </div>
-		{{/ionList}}
-		<br>
 		<h3> Training mode </h3>
-
 		{{#if currentUser.profile.CO2Mode}}	
-			<p>You are currently in CO2 Tolerance mode.</p>
-			<button id='changeforward' class='button button-dark'>Change to O2 deprivation</button>
+			<p>You are currently in CO<sub>2</sub> Tolerance mode.</p>
+			<button id='changeforward' class='button button-dark icon-left ion-arrow-right-a'> Change to O<sub>2</sub> deprivation</button>
 		{{else}}
-			<p>You are currently in O2 Deprivation mode.</p>
-			<button id='changebackward' class='button button-dark'>Change to CO2 deprivation</button>
+			<p>You are currently in O<sub>2</sub> Deprivation mode.</p>
+			<button id='changebackward' class='button button-dark icon-left ion-arrow-left-a'> Change to CO<sub>2</sub> deprivation</button>
 		{{/if}}
 		<br><br>
 		<p>Read more about both modes <a id='readmore' data-ion-modal="readmore" href="#">here</a> </p>
-	</div>
 
+		<h3>Notifications</h3>
+
+		<div class="item range range-positive">
+			<i class="icon ion-volume-low"></i>
+				<input id='volume' type="range" name="volume">
+			<i class="icon ion-volume-high"></i>
+		</div>
+
+		<li class="item item-toggle">
+			Mute
+			<label class="toggle toggle-assertive">
+				{{#if currentUser.profile.muted}}
+					<input id='mute' type="checkbox" checked >
+				{{else}}
+					<input id='mute' type="checkbox">
+				{{/if}} 
+				<div class="track"> <div class="handle"></div></div>
+			</label>
+		</li>
+		<li class="item item-toggle">
+			Vibrate
+			<label class="toggle toggle-assertive">
+				{{#if currentUser.profile.vibrate}}
+					<input id='vibrate' type="checkbox" checked >
+				{{else}}
+					<input id='vibrate' type="checkbox">
+				{{/if}} 
+				<div class="track"> <div class="handle"></div></div>
+			</label>
+		</li>
+	{{/ionList}}
+	<div style='height: 30px'></div>
 </template>
 
 
 <template name="readmore">
 	{{#ionModal title="CO2 tolerance / O2 deprivation"}}
 		<div class="padding">
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco</p>
+			<h3>General remarks</h3>
+			<p>
+			Do not practice any training mode in excess - it is a good practice to switch after 2-5 sessions. In particular, O<sub>2</sub> tolerance sessions should not be repeated over 5 times without CO<sub>2</sub> sessions in between.
+			</p>
+			<h3>CO<sub>2</sub> Tolerance</h3>
+			<p>
+			Carbon dioxide (CO<sub>2</sub>) tolerance breath/hold intervals will help your body to become tolerant to high levels of CO<sub>2</sub> in the blood. It is important to remember that the urge to breathe is caused by high levels of CO<sub>2</sub>, and not low levels of O<sub>2</sub>. If you build up CO<sub>2</sub> tolerance, the urge will come in later. 
+			</p>
+			<h3>O<sub>2</sub> Deprivation</h3>
+			Oxigen (O2) deprivation breath/hold intervals will help your body deal with low levels of O<sub>2</sub>. 
+			When holding your breath, oxigen (O<sub>2</sub>) levels in your blood start to lower. It is therefore immensely important that you train your body to use very little oxigen when holding your breath. In these sessions, you make your body familiar to low levels of O<sub>2</sub>, to which he will respond by actually using less oxigen. 
+			
 		</div>
 	{{/ionModal}}
 </template>
+
+
+
+

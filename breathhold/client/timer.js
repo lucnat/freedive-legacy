@@ -5,8 +5,8 @@ startTimer = function(i, callback) {
         seconds,
         id;
 
-       duration = timeTable.list()[i];
-
+       var duration = timeTable.list()[i];
+       console.log('duration: ' + duration);
     function timer() {
         // get the number of seconds that have elapsed since 
         // startTimer() was called
@@ -29,13 +29,13 @@ startTimer = function(i, callback) {
             //start = Date.now() + 1000;
             Meteor.clearInterval(id);
             if(callback){
-            	
             	callback();
             }
         }
     };
     // we don't want to wait a full second before the timer starts
-    timer();
-    id = Meteor.setInterval(timer, 1000);
+    var id = Meteor.setInterval(timer, 1000);
     Session.set('currentTimer', id);
+
+    timer();
 }

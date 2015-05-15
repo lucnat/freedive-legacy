@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height">
+  <meta name="msapplication-tap-highlight" content="no">
+
+  <link rel="stylesheet" type="text/css" class="__meteor-css__" href="/9e8d1bb2bbd2768137e3369b6009c9e4db33ebf5.css?meteor_css_resource=true">
+
+  <script type="text/javascript">
+    __meteor_runtime_config__ = JSON.parse(decodeURIComponent("%7B%22meteorRelease%22%3A%22METEOR%401.1.0.2%22%2C%22ROOT_URL%22%3A%22http%3A%2F%2Fbreathhold.meteor.com%2F%22%2C%22ROOT_URL_PATH_PREFIX%22%3A%22%22%2C%22DDP_DEFAULT_CONNECTION_URL%22%3A%22http%3A%2F%2Fbreathhold.meteor.com%22%2C%22autoupdateVersionCordova%22%3A%2211f61eef31a8c6f8a92800972b03f339f7caa47c%22%2C%22appId%22%3A%225sa1v8nti52rjkbjgn%22%7D"));
+
+    if (/Android/i.test(navigator.userAgent)) {
+      // When Android app is emulated, it cannot connect to localhost,
+      // instead it should connect to 10.0.2.2
+      // (unless we're using an http proxy; then it works!)
+      if (!__meteor_runtime_config__.httpProxyPort) {
+        __meteor_runtime_config__.ROOT_URL = (__meteor_runtime_config__.ROOT_URL || '').replace(/localhost/i, '10.0.2.2');
+        __meteor_runtime_config__.DDP_DEFAULT_CONNECTION_URL = (__meteor_runtime_config__.DDP_DEFAULT_CONNECTION_URL || '').replace(/localhost/i, '10.0.2.2');
+      }
+    }
+  </script>
+
+  <script type="text/javascript" src="/cordova.js"></script>
+  <script type="text/javascript" src="/f6cb367312f10b3e5d182644bf1ed4d2f0368197.js"></script>
+
+
+  
+</head>
+
+<body>
+  
+</body>
+</html>

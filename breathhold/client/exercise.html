@@ -10,8 +10,15 @@
 	<p> </p>
 	 <div style='text-align: center'>
 		<div class='button-bar'>
-			<button id='start' class='button button-balanced icon-left ion-play'>Start</button>
-			<button id='pause' class='button button-energized icon-left ion-pause' style='display:none'>Pause</button>
+			<!--{{#if paused}}-->
+				<button id='start' class='button button-balanced icon-left ion-play'>Start</button>
+			<!--{{/if}}
+			{{#if stopped}}
+				<button id='start' class='button button-balanced icon-left ion-play'>Start</button>
+			{{/if}}
+			{{#if started}}
+				<button id='pause' class='button button-energized icon-left ion-pause'>Pause</button>
+			{{/if}}-->
 			<button id='stop' class='button button-assertive icon-left ion-stop'>Stop</button>
 		</div>
 	</div>
@@ -22,12 +29,13 @@
 	{{#each rows}}
 		{{> row}}
 	{{/each}}
+	<div style='height: 20px'></div>
 </template>
 
 <template name="row">
 	<div class="row" style='text-align:center'>
-		<div class="col" style='font-size: 20px'>{{breathe}}</div>
-		<div class="col" style='font-size: 20px'>{{hold}}</div>
+		<div class="col timer breathe" style='font-size: 23px; border-radius: 10px'>{{breathe}}</div>
+		<div class="col timer hold" style='font-size: 23px; border-radius: 10px'>{{hold}}</div>
 	</div>
 </template>
 

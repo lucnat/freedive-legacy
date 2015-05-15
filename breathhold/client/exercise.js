@@ -11,30 +11,33 @@ Template.exercise.helpers({
 			}
 		}
 		return stringTable;
-	}
+	},
+	'started': function(){
+		return Session.get('session') === 'started';
+	},
+	'paused': function(){
+		return Session.get('session') === 'paused';
+	},
+	'stopped': function(){
+		return Session.get('session') === 'stopped';
+	},
 });
 
 Template.exercise.events({
 	'click #start': function(){
-		i = 0;
-		Session.set('sessionStarted', true);
-		console.log('session started!');
-		startCountdown();
-		$('#start').hide();
-		$('#pause').show();
+		if(! (Session.get('session') === 'started')){
+			console.log('Session started.');
+			i = 0;
+			Session.set('session','started');
+			startCountdown();
+		}
 	},
 	'click #stop': function(){
-		Meteor.clearInterval(Session.get('currentTimer'));
-		resetTable();
-		$('#start').show();
-		$('#pause').hide();
-
+		stop();
 	},
 	'click #pause': function(){
 		Meteor.clearInterval(Session.get('currentTimer'));
-		$('#start').show();
-		$('#pause').hide();
-
+		Session.set('session', 'paused');
 	}
 });
 
@@ -66,6 +69,23 @@ resetTable = function(){
 	for(var j=0; j<timeTable.length; j++) 
 		timeTable[j] = Math.round(timeTable[j]);
 	timeTable.changed();
+};
+
+startCountdown = function(){
+	//starts countdown of element i
+	if(i%2 == 0){
+		notify('/breathe.mp3');
+	}
+	else{
+		notify('/hold.mp3');
+	}
+	console.log('called');
+	changeStyling();
+	startTimer(i, function(){
+		startCountdown();
+	});
+
+	i++;
 };
 
 CO2table = function(){
@@ -112,22 +132,87 @@ O2table = function(){
 	return table;
 };
 
-startCountdown = function(){
-	//starts countdown of element i
-	if(i%2 == 0) 
-		new buzz.sound('/breathe.mp3').play()
-	else
-		new buzz.sound('/hold.mp3').play();
+notify = function(path){
+	try{
+		var volume = Meteor.user().profile.volume;
+		if(Meteor.isCordova){
 
-	startTimer(i, function(){
-		startCountdown();
-	});
+			//vibrate
+			if(Meteor.user().profile.vibrate) navigator.notification.vibrate(1500);
 
-	i++;
+			// play sound
+			if(!Meteor.user().profile.muted){
+				var getLocalPath = function (localPath) {
+				  return cordova.file.applicationDirectory.replace('file://', '') + 'www/application/' + localPath.substr(1);
+				};
+				var src = getLocalPath(path);
+				var media = new Media(src, function () {});
+				media.setVolume(volume/300);
+				media.play({playAudioWhenScreenIsLocked: true});
+			}
+		} else {
+			if(!Meteor.user().profile.muted){ 
+				var sound = new Audio(path);
+				sound.volume = volume/100;
+				sound.play();
+			}
+		}
+	} catch(e){ console.log('problem with notification: sound or vibration '); console.log(e) };
+};
+
+stop = function(){
+	Meteor.clearInterval(Session.get('currentTimer'));
+	resetTable();
+	Session.set('session', 'stopped');
+	console.log('Session stopped!');
+
+	// make the element at which we stopped white
+	var rawElement = $('.timer')[i];
+	var jqueryElement = $(rawElement);
+	jqueryElement.css('background-color','white');
 }
+
+changeStyling = function(){
+
+	// try to styling to the new element
+	try{
+		var rawElement = $('.timer')[i];
+		var jqueryElement = $(rawElement);
+		if(i%2 == 0){
+			jqueryElement.css('background-color', '#99E699');
+
+		} else{
+			jqueryElement.css('background-color', '#FF9494');
+		}
+	} catch(e) {};
+
+	// now lets try to remove styling from the preceding element
+	try{
+		var beforeRawElement = $('.timer')[i-1];
+		var beforeJQueryElement = $(beforeRawElement);
+		beforeJQueryElement.css('background-color', 'white');
+
+	} catch(e){};
+}
+
+Meteor.startup(function(){
+	Session.set('session','stopped');
+});
 
 Tracker.autorun(function(){
 	try{
-		resetTable();
+		if(!Meteor.user()){
+			Router.go('/login');
+		} else{
+			Router.go('/configure');
+		}
 	} catch(e) {};
 });
+
+
+decreaseTimes = function(){
+	for(var j=0; j<timeTable.length; j++){
+		timeTable[j] = 5;
+	}
+	timeTable.changed();
+};
