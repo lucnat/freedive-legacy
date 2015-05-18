@@ -41,6 +41,14 @@ Template.exercise.events({
 	}
 });
 
+Template.exercise.rendered = function(){
+	if(! Session.get('firstInitDone')){
+		resetTable();
+		changeStyling();
+		Session.set('firstInitDone', true);
+	}
+}
+
 transformTime = function(clock){
 	function pad(num, size) {
 		var s = num+"";
@@ -173,7 +181,7 @@ stop = function(){
 }
 
 changeStyling = function(){
-
+	console.log('changing styling');
 	// try to styling to the new element
 	try{
 		var rawElement = $('.timer')[i];
