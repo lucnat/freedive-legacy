@@ -146,7 +146,7 @@ notify = function(path){
 		if(Meteor.isCordova){
 
 			//vibrate
-			if(Meteor.user().profile.vibrate) navigator.notification.vibrate(1500);
+			if(Meteor.user().profile.vibrate) navigator.notification.vibrate(500);
 
 			// play sound
 			if(!Meteor.user().profile.muted){
