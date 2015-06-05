@@ -1,0 +1,42 @@
+<template name="exercise">
+	{{#contentFor "headerTitle"}}
+  		<h1 class="title">Exercise</h1>
+	{{/contentFor}}
+	{{#contentFor "headerButtonRight"}}
+		<button class="button button-clear pull-right">
+			{{> atNavButton}}
+		</button>
+	{{/contentFor}}
+	<p> </p>
+	 <div style='text-align: center'>
+		<div class='button-bar'>
+			<!--{{#if paused}}-->
+				<button id='start' class='button button-balanced icon-left ion-play'>Start</button>
+			<!--{{/if}}
+			{{#if stopped}}
+				<button id='start' class='button button-balanced icon-left ion-play'>Start</button>
+			{{/if}}
+			{{#if started}}
+				<button id='pause' class='button button-energized icon-left ion-pause'>Pause</button>
+			{{/if}}-->
+			<button id='stop' class='button button-assertive icon-left ion-stop'>Stop</button>
+		</div>
+	</div>
+	<div class="row" style='text-align:center'>
+		<div class="col"><h2>Breathe</h2></div>
+		<div class="col"><h2>Hold</h2></div>
+	</div>
+	{{#each rows}}
+		{{> row}}
+	{{/each}}
+	<div style='height: 20px'></div>
+</template>
+
+<template name="row">
+	<div class="row" style='text-align:center'>
+		<div class="col timer breathe" style='font-size: 23px; border-radius: 10px'>{{breathe}}</div>
+		<div class="col timer hold" style='font-size: 23px; border-radius: 10px'>{{hold}}</div>
+	</div>
+</template>
+
+
