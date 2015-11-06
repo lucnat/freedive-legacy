@@ -1,0 +1,24 @@
+<template name="profile">
+
+	<div class="card" style='text-align: center'>
+		<p>Signed in as</p>
+		<h3>{{currentUser.emails.[0].address}}</h3>
+		<br>
+		<button id='logout' class='button button-assertive'>Log Out</button>
+		<br><br>
+	</div>
+	{{> contact}}
+</template>
+
+<template name="contact">
+	<div class="card padding" style="text-align: center">
+		<p>This application is still under active development. If you have suggestions or comments, write to the developer. </p>
+		<a href="mailto:dorfbazaar@gmail.com" class="button button-positive">Contact Developer</a>
+	</div>
+</template>
+
+
+<template name="firstLogin">
+	{{> remarks}}
+	<button class="button button-balanced button-block button-outline">Got it</button>
+</template>

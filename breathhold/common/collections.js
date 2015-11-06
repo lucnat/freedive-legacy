@@ -1,1 +1,0 @@
-Ground.Collection(Meteor.users);
