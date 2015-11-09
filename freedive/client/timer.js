@@ -21,6 +21,9 @@ startTimer = function(i, callback) {
         minutes = minutes < 10 ? "0" + minutes : minutes;
         seconds = seconds < 10 ? "0" + seconds : seconds;
 
+        if(seconds == 10 && minutes == 0){
+            playSound('10seconds');
+        }
         //console.log(minutes + ":" + seconds); 
 
         if (diff <= 0) {

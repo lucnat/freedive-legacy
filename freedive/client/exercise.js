@@ -31,7 +31,6 @@ Template.exercise.events({
 			Session.set('session','started');
 			Session.set('hideTabs',true);
 			startCountdown();
-			navigator.notification.vibrate(500);
 		}
 	if (Meteor.isCordova) {
 			if (AdMob) {
@@ -72,6 +71,7 @@ Template.exercise.rendered = function(){
 		Session.set('firstInitDone', true);
 	}
 	resetTable();
+	changeStyling();
 }
 
 transformTime = function(clock){

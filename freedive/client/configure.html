@@ -4,10 +4,10 @@
 		<h1 class="title">Configure</h1>
 	{{/contentFor}}
 
-
 	
-	<h3> Maximum breath hold time</h3>
 	{{#ionList}}
+		<h3> Maximum breath hold time</h3>
+		<p>O2 and CO2 tables are being calculated from this value. It is therefore important to set it to your actual maximum breathhold duration to get the most out of this application.</p>
 		<div class="item range range-positive">
 			<p style='font-size: 20px'>{{maxTime}}</p>
 			<input id='maxTime' type="range" name="volume" min="2" max="48" value="0">
@@ -54,6 +54,8 @@
 				<div class="track"> <div class="handle"></div></div>
 			</label>
 		</li>
+		<br>
+		<p>Muted and enabled vibration is the recommended way of doing the tables. Vibrations are very short on 10 seconds remaining and long on breath/hold change.</p>
 		<div height="100"></div>
 	{{/ionList}}
 </template>
@@ -78,6 +80,7 @@
 		<p>
 		Do not practice any training mode in excess - it is a good practice to switch after 2-5 sessions. In particular, O<sub>2</sub> tolerance sessions should not be repeated over 5 times without CO<sub>2</sub> sessions in between.
 		</p>
+		<br><br><br><br><br>
 	</div>
 </template>
 

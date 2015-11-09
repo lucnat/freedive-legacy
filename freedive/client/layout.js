@@ -46,6 +46,16 @@ Template.layout.rendered = function(){
 				}
 			} catch(e){}
 		}
+
+		if(Meteor.user().profile.vibrate){
+			if(Meteor.isCordova){
+				if(string == '10seconds' ){
+					navigator.notification.vibrate(100);
+				} else {
+					navigator.notification.vibrate(800);
+				}
+			}
+		}
 	}
 }
 
