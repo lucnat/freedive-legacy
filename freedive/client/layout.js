@@ -5,6 +5,7 @@ Template.layout.helpers({
 });
 
 Template.layout.rendered = function(){
+	IonSideMenu.snapper.disable();
 	if (Meteor.isCordova) {
 		breatheSound = new Media(Meteor.absoluteUrl('breathe.mp3'));
 		breatheSound.setVolume(0.0); breatheSound.play();
@@ -14,7 +15,6 @@ Template.layout.rendered = function(){
 		seconds10.setVolume(0.0); seconds10.play();
 		seconds30 = new Media(Meteor.absoluteUrl('30seconds.mp3'));
 		seconds30.setVolume(0.0); seconds30.play();
-
 		console.log('------------------- Audio files loaded --------------------');
 	}
 	else{
