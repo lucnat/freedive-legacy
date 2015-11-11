@@ -3,28 +3,36 @@
 	{{#contentFor "headerTitle"}}
 		<h1 class="title">Configure</h1>
 	{{/contentFor}}
+	{{#contentFor "headerButtonLeft"}}
+		<button class="button button-clear pull-left" data-ion-menu-toggle="left">
+		{{> ionIcon icon='navicon'}}
+		</button>
+	{{/contentFor}}
 
-	
 	{{#ionList}}
 		<h3> Maximum breath hold time</h3>
 		<p>O2 and CO2 tables are being calculated from this value. It is therefore important to set it to your actual maximum breathhold duration to get the most out of this application.</p>
-		<div class="item range range-positive">
-			<p style='font-size: 20px'>{{maxTime}}</p>
-			<input id='maxTime' type="range" name="volume" min="2" max="48" value="0">
+		<div style="text-align: center">
+			<a id="up" class="button button-icon icon ion-arrow-up-b"></a>
+			<div class="item range range-positive">
+				<p style='font-size: 20px'>{{maxTime}}</p>
+				<input id='maxTime' type="range" name="volume" min="2" max="48" value="0">
+			</div>
+			<a id="down" class="button button-icon icon ion-arrow-down-b"></a>
 		</div>
-
 		<h3> Training mode </h3>
 		{{#if currentUser.profile.CO2Mode}}	
 			<p>You are currently in CO<sub>2</sub> Tolerance mode.</p>
-			<button id='changeforward' class='button button-dark icon-left ion-arrow-right-a'> Change to O<sub>2</sub> deprivation</button>
+			<button id='changeforward' class='button button-dark icon-left ion-arrow-right-a'> Change to O<sub>2</sub> Deprivation</button>
 		{{else}}
 			<p>You are currently in O<sub>2</sub> Deprivation mode.</p>
-			<button id='changebackward' class='button button-dark icon-left ion-arrow-left-a'> Change to CO<sub>2</sub> deprivation</button>
+			<button id='changebackward' class='button button-dark icon-left ion-arrow-left-a'> Change to CO<sub>2</sub> Tolerance</button>
 		{{/if}}
 		<br><br>
 		<p>Read more about both modes <a id='readmore' data-ion-modal="readmore" href="#">here</a> </p>
 
 		<h3>Notifications</h3>
+		<p>Maximum relaxation is what you want to achieve. Thus, notifications should be reduced to a minimum. It is recommended to mute the application and use vibration. You will get notified on 10 seconds remaining (short vibrate) and on breath/hold change (long vibrate). This setting allows you to close your eyes and not pay attention to your hearing, which results in maximum relaxation. </p>
 
 		<div class="item range range-positive">
 			<i class="icon ion-volume-low"></i>
@@ -55,7 +63,6 @@
 			</label>
 		</li>
 		<br>
-		<p>Muted and enabled vibration is the recommended way of doing the tables. Vibrations are very short on 10 seconds remaining and long on breath/hold change.</p>
 		<div height="100"></div>
 	{{/ionList}}
 </template>

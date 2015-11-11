@@ -12,12 +12,10 @@ Meteor.startup(function () {
     if (AdMob) {
       AdMob.createBanner( {
         adId: 'ca-app-pub-8972085867877753/1984936342',
-        position: AdMob.AD_POSITION.POS_XY,
-        y: window.innerHeight-99,
-        x: 0,
+        position: AdMob.AD_POSITION.BOTTOM_CENTER,
         overlap: true,
         isTesting: false,
-        autoShow: false,
+        autoShow: true,
         success: function() {
           console.log("Received ad");
         },

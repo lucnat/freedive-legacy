@@ -9,10 +9,20 @@ Template.configure.helpers({
 Template.configure.events({
 	'change #maxTime': function(){
 		var val = $('#maxTime').val();
-		var profile = Meteor.user().profile;
-		profile.maxTime = val;
-		Meteor.users.update( {'_id': Meteor.user()._id}, {$set: { profile: profile }});
+		Users.update({'_id': Meteor.userId()}, {$set: {'profile.maxTime': val}});
 		stop();
+	},
+
+	'click #up': function(){
+		var newTime = $('#maxTime').val()/1 + 1;
+		$('#maxTime').val(newTime);
+		Users.update({'_id': Meteor.userId()}, {$set: {'profile.maxTime': newTime}});
+	},
+	
+	'click #down': function(){
+		var newTime = $('#maxTime').val()/1 - 1;
+		$('#maxTime').val(newTime);
+		Users.update({'_id': Meteor.userId()}, {$set: {'profile.maxTime': newTime}});
 	},
 
 	'click #changebackward': function(){

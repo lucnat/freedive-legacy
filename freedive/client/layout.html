@@ -8,26 +8,27 @@
 
 <template name="layout">
 	{{#ionBody}}
-		{{> ionNavBar class="bar-dark"}}
-		{{#contentFor "headerTitle"}}
-			<h1 class="title">Freedive</h1>
-		{{/contentFor}}
-
-		{{#ionView}}
-			{{#ionContent class="padding"}}
-				{{> yield}}
-				<div style='height: 100px'></div>
-			{{/ionContent}}
-		{{/ionView}}
-		{{#if currentUser}}
-			{{#unless hideTabs}}
-				{{#ionTabs style="ios" class='tabs-dark'}}
-					{{> ionTab title="Tables" path="exercise" iconOff="flash" iconOn="flash" class="tab-item-positive"}}
-					{{> ionTab title="Configure" path="configure" iconOff="gear-a" iconOn="gear-a" class="tab-item-positive"}}
-					{{> ionTab title="Profile" path="profile" iconOff="person" iconOn="person" class="tab-item-positive"}}
-				{{/ionTabs}}
-			{{/unless}}
-		{{/if}}
+		{{#ionSideMenuContainer side="left"}}
+			{{#ionSideMenus}}
+				{{#ionSideMenu}}
+					<a href="/" class="item item-icon-left" onclick="IonSideMenu.snapper.close()" ><i class="icon ion-flash"></i>Tables</a>
+					<a href="/configure" class="item item-icon-left" onclick="IonSideMenu.snapper.close()"><i class="icon ion-gear-a"></i>Configure</a>
+					<a href="/profile" class="item item-icon-left" onclick="IonSideMenu.snapper.close()"><i class="icon ion-person"></i>Profile</a>
+				{{/ionSideMenu}}
+			{{/ionSideMenus}}
+			{{#ionSideMenuContent}}
+				{{> ionNavBar class="bar-dark"}}
+				{{#contentFor "headerTitle"}}
+					<h1 class="title">Freedive</h1>
+				{{/contentFor}}
+				{{#ionView}}
+					{{#ionContent class="padding"}}
+						{{> yield}}
+						<div style="height: 50px"></div>
+					{{/ionContent}}
+				{{/ionView}}			
+			{{/ionSideMenuContent}}
+		{{/ionSideMenuContainer}}
 	{{/ionBody}}
 </template>
 

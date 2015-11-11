@@ -21,6 +21,9 @@ Template.exercise.helpers({
 	'stopped': function(){
 		return Session.get('session') === 'stopped';
 	},
+	'hideTabs': function(){
+		return Session.get('hideTabs');
+	}
 });
 
 Template.exercise.events({
@@ -33,9 +36,6 @@ Template.exercise.events({
 			startCountdown();
 		}
 	if (Meteor.isCordova) {
-			if (AdMob) {
-				AdMob.showBanner(AdMob.AD_POSITION.BOTTOM_CENTER)
-			}
 			window.plugins.insomnia.keepAwake();
 		}
 	},
@@ -47,9 +47,6 @@ Template.exercise.events({
 				Session.set('hideTabs',false);
 				stop();
 				if (Meteor.isCordova) {
-					if (AdMob) {
-						AdMob.showBannerAtXY(0,window.innerHeight-99);
-					}
 					window.plugins.insomnia.allowSleepAgain();
 				}
             },

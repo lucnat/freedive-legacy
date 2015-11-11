@@ -1,9 +1,18 @@
 <template name="exercise">
+
 	{{#contentFor "headerTitle"}}
 		<h1 class="title">Tables</h1>
 	{{/contentFor}}
-
-
+	{{#if hideTabs}}
+		{{#contentFor "headerButtonLeft"}}
+		{{/contentFor}}
+	{{else}}
+		{{#contentFor "headerButtonLeft"}}
+			<button class="button button-clear pull-left" data-ion-menu-toggle="left">
+			{{> ionIcon icon='navicon'}}
+			</button>
+		{{/contentFor}}
+	{{/if}}
 	<p> </p>
 	 <div style='text-align: center'>
 		{{#if started}}

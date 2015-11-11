@@ -6,9 +6,6 @@ Template.layout.helpers({
 
 Template.layout.rendered = function(){
 	if (Meteor.isCordova) {
-		if (AdMob) {
-			AdMob.showBannerAtXY(0,window.innerHeight-99);
-		}
 		breatheSound = new Media(Meteor.absoluteUrl('breathe.mp3'));
 		breatheSound.setVolume(0.0); breatheSound.play();
 		holdSound = new Media(Meteor.absoluteUrl('hold.mp3'));

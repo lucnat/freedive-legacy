@@ -15,3 +15,11 @@ Template.atForm.rendered = function(){
 		}
 	}
 }
+
+Template.atForm.destroyed = function(){
+	if (Meteor.isCordova) {
+		if (AdMob) {
+			AdMob.showBanner()
+		}
+	}
+}
