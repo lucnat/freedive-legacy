@@ -3,6 +3,7 @@ Router.configure({
 });
 
 Router.route('/', {name: 'exercise'});
+Router.route('/hold', {name: 'hold'});
 Router.route('/configure', {name: 'configure'});
 Router.route('/profile', {name: 'profile'});
 Router.route('/login', {name: 'login'});

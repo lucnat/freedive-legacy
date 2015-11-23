@@ -31,6 +31,9 @@ Meteor.startup(function () {
   }
 });
 
+Template.registerHelper('hideTabs', function(){
+    return Session.get('hideTabs');
+});
 
 Accounts.onLogin(function(){
   if(!Meteor.user().profile){

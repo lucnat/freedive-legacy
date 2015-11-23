@@ -35,7 +35,7 @@ Template.exercise.events({
 			Session.set('hideTabs',true);
 			startCountdown();
 		}
-	if (Meteor.isCordova) {
+		if (Meteor.isCordova) {
 			window.plugins.insomnia.keepAwake();
 		}
 	},
