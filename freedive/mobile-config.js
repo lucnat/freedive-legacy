@@ -24,8 +24,7 @@ App.icons({
 
 
 App.launchScreens({
-  // iOS
-  
+  // iOS  
   'iphone':               'resources/splash/ios/iphone_2x.png',
   'iphone_2x':            'resources/splash/ios/iphone_2x.png',
   'iphone5':              'resources/splash/ios/iphone5.png',
@@ -36,7 +35,6 @@ App.launchScreens({
   'ipad_portrait_2x':     'resources/splash/ios/ipad_portrait_2x.png',
   'ipad_landscape':       'resources/splash/ios/ipad_landscape.png',
   'ipad_landscape_2x':    'resources/splash/ios/ipad_landscape_2x.png'
-
 });
 
 

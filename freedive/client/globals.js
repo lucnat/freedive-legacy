@@ -36,6 +36,20 @@ Template.registerHelper('hideTabs', function(){
 });
 
 Accounts.onLogin(function(){
+
+  var defaultTables = [
+    {
+      'name': 'CO2 Tolerance',
+      '_id': new Meteor.Collection.ObjectID()._str,
+      'table': CO2table(),
+    },
+    {
+      'name': 'O2 Deprivation',
+      '_id': new Meteor.Collection.ObjectID()._str,
+      'table': O2table(),
+    }
+  ];
+
   if(!Meteor.user().profile){
     // first login we set default profile
     Meteor.users.update({'_id': Meteor.user()._id}, {$set: { profile: {
@@ -45,7 +59,13 @@ Accounts.onLogin(function(){
       muted: false,
       vibrate: false,
       firstLogin: true,
+      tables: defaultTables
     }}});
+  }
+
+  if(!Meteor.user().profile.tables){
+    // if account created before update then profile exists but not default tables so let's insert. 
+    Meteor.users.update({'_id': Meteor.user()._id}, {$set: {'profile.tables': defaultTables }});
   }
   resetTable();
   Router.go('/profile');
