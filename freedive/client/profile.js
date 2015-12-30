@@ -11,6 +11,6 @@ Template.firstLogin.events({
 		var profile = Users.findOne(Meteor.userId()).profile;
 		profile.firstLogin = false;
 		Users.update({'_id': Meteor.userId()}, {$set: { 'profile': profile }});
-		Router.go('/');
+		Router.go('/configure');
 	}
 });

@@ -40,11 +40,13 @@ Accounts.onLogin(function(){
   var defaultTables = [
     {
       'name': 'CO2 Tolerance',
+      'description': 'auto-generated',
       '_id': new Meteor.Collection.ObjectID()._str,
       'table': CO2table(),
     },
     {
       'name': 'O2 Deprivation',
+      'description': 'auto-generated',
       '_id': new Meteor.Collection.ObjectID()._str,
       'table': O2table(),
     }
@@ -67,6 +69,5 @@ Accounts.onLogin(function(){
     // if account created before update then profile exists but not default tables so let's insert. 
     Meteor.users.update({'_id': Meteor.user()._id}, {$set: {'profile.tables': defaultTables }});
   }
-  resetTable();
   Router.go('/profile');
 });

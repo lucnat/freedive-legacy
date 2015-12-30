@@ -2,7 +2,8 @@ Router.configure({
 	layoutTemplate: 'layout',
 });
 
-Router.route('/', {name: 'exercise'});
+Router.route('/', {name: 'tables'});
+Router.route('/table/:_id', {name: 'table'});
 Router.route('/hold', {name: 'hold'});
 Router.route('/configure', {name: 'configure'});
 Router.route('/profile', {name: 'profile'});
@@ -33,9 +34,11 @@ var OnBeforeActions = {
     }
 };
 
+var onlyWhenLoggedIn = ['tables', 'table', 'hold', 'configure', 'profile'];
+
 Router.onBeforeAction(OnBeforeActions.loginRequired, {
-    only: ['exercise', 'configure', 'profile']
+    only: onlyWhenLoggedIn
 });
 Router.onBeforeAction(OnBeforeActions.firstLogin, {
-    only: ['exercise', 'configure', 'profile']
+    only: onlyWhenLoggedIn
 });

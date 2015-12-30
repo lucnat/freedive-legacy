@@ -1,42 +1,32 @@
 Template.configure.helpers({
 	'maxTime': function(){
 		try{
-			return transformTime(Meteor.user().profile.maxTime*10*1000);
+			var maxTime = Meteor.user().profile.maxTime*10*1000;
+			return moment.utc(maxTime).format("mm:ss");
 		} catch(e) {};
 	},
 });
+
 
 Template.configure.events({
 	'change #maxTime': function(){
 		var val = $('#maxTime').val();
 		Users.update({'_id': Meteor.userId()}, {$set: {'profile.maxTime': val}});
-		stop();
+		Session.set('maxTimeChanged', true);
 	},
 
 	'click #up': function(){
 		var newTime = $('#maxTime').val()/1 + 1;
 		$('#maxTime').val(newTime);
 		Users.update({'_id': Meteor.userId()}, {$set: {'profile.maxTime': newTime}});
+		Session.set('maxTimeChanged', true);
 	},
 	
 	'click #down': function(){
 		var newTime = $('#maxTime').val()/1 - 1;
 		$('#maxTime').val(newTime);
 		Users.update({'_id': Meteor.userId()}, {$set: {'profile.maxTime': newTime}});
-	},
-
-	'click #changebackward': function(){
-		var profile = Meteor.user().profile;
-		profile.CO2Mode = true;
-		Meteor.users.update({'_id': Meteor.user()._id}, {$set: { profile: profile }});
-		stop();
-	},
-
-	'click #changeforward': function(){
-		var profile = Meteor.user().profile;
-		profile.CO2Mode = false;
-		Meteor.users.update({'_id': Meteor.user()._id}, {$set: { profile: profile }});
-		stop();
+		Session.set('maxTimeChanged', true);
 	},
 
 	'change #volume': function(){
@@ -66,6 +56,18 @@ Template.configure.rendered = function(){
 	$('#volume').val(volume);
 }
 
-Template.readmore.rendered = function(){
-	
+Template.configure.destroyed = function(){
+	if(Session.get('maxTimeChanged')){
+		console.log('loading new tables');
+		var tables = Meteor.user().profile.tables;
+		tables.forEach(function(table){
+			if(table.name == 'CO2 Tolerance'){
+				table.table = CO2table();
+			} else if(table.name = 'O2 Deprivation'){
+				table.table = O2table();
+			}
+		});
+		Meteor.users.update({'_id': Meteor.userId()}, {$set: { 'profile.tables' : tables}});
+		Session.set('maxTimeChanged', false);
+	}
 }
