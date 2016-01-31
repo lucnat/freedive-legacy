@@ -5,15 +5,46 @@ Template.tables.helpers({
 	}
 });
 
+Template.tables.events({
+	'click #deleteTable': function(event){
+		event.preventDefault();
+        IonPopup.confirm({
+            title: 'Do you really want to delete this table?',
+            'okText': 'Yes',
+            onOk: function() {
+            	var tableId = $(event.target).attr('data-id');
+            	var tables = Meteor.user().profile.tables;
+				tables = tables.filter(function( table ) {
+					return table._id !== tableId;
+				});
+				Users.update({'_id': Meteor.userId()},{$set: {'profile.tables': tables }});
+            }
+        });
+	}
+});
+
 Template.table.helpers({
 	'table': function(){
-		return getCorrectTable();
+		var table = getCorrectTable();
+		var totalBreathTime = 0;
+		var totalHoldTime = 0;
+		for(var i=0; i<table.table.length; i++){
+			if(i%2 == 0) {
+				totalBreathTime += table.table[i];
+			} else {
+				totalHoldTime += table.table[i];
+			}
+		}
+		table.totalBreathTime = moment.utc(totalBreathTime*1000).format('mm:ss');
+		table.totalHoldTime = 	moment.utc(totalHoldTime*1000).format('mm:ss');
+		table.totalTime = 		moment.utc((totalBreathTime + totalHoldTime)*1000).format('mm:ss');
+		return table;
 	},
 
 	'rows': function(){	
 		var table = getCorrectTable().table;
 		stringTable = [];
-		for(var i=0; i< table.length/2; i++){
+		for(var i=0; i < table.length/2; i++){
 			stringTable[i] = {
 				'breathe' : moment.utc(table[i*2]*1000).format("mm:ss"),
 				'hold': 	moment.utc(table[i*2+1]*1000).format("mm:ss")
@@ -51,7 +82,7 @@ Template.table.events({
 
 	'click #stop': function(){
         IonPopup.confirm({
-            title: 'Do you really want to stop your current session??',
+            title: 'Do you really want to stop the current session?',
             'okText': 'Yes',
             onOk: function() {
 				Session.set('started', false);
@@ -133,9 +164,8 @@ function getCorrectTable(){
 	return found;
 }
 
-
 CO2table = function(){
-	// returns CO2 table array
+	// returns CO2 table array by acceessing profile maxTime or using default
 	var table = [];
 	try{
 		var maxTime = Meteor.user().profile.maxTime*10;
@@ -165,7 +195,7 @@ CO2table = function(){
 };
 
 O2table = function(){
-	// returns O2 table array
+	// returns O2 table array by acceessing profile maxTime or using default
 	var table = [];
 	try{
 		var maxTime = Meteor.user().profile.maxTime*10;

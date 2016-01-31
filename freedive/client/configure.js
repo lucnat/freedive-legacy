@@ -63,7 +63,7 @@ Template.configure.destroyed = function(){
 		tables.forEach(function(table){
 			if(table.name == 'CO2 Tolerance'){
 				table.table = CO2table();
-			} else if(table.name = 'O2 Deprivation'){
+			} else if(table.name == 'O2 Deprivation'){
 				table.table = O2table();
 			}
 		});

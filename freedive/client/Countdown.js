@@ -23,7 +23,9 @@ Countdown = class{
 		that.id = Meteor.setInterval(function(){
 			that.duration = that.duration - 1000;
 			$(that.element).html(moment.utc(that.duration).format("mm:ss"));
-			if(that.duration == 10000){
+			if(that.duration == 30000){
+				playSound('30seconds');
+			} else if(that.duration == 10000){
 				playSound('10seconds');
 			}
 			if(that.duration <= 0){
@@ -60,6 +62,7 @@ function finished(){
 	IonPopup.alert({'title': 'Congratulations! Session finished!'});
 	Session.set('started', false);
 	Session.set('hideTabs',false);
+	playSound('finished');
 	if (Meteor.isCordova) {
 		window.plugins.insomnia.allowSleepAgain();
 	}

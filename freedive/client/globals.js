@@ -36,7 +36,7 @@ Template.registerHelper('hideTabs', function(){
 });
 
 Accounts.onLogin(function(){
-
+  console.log('logged in');
   var defaultTables = [
     {
       'name': 'CO2 Tolerance',
@@ -54,6 +54,7 @@ Accounts.onLogin(function(){
 
   if(!Meteor.user().profile){
     // first login we set default profile
+    console.log('inserting default profile + tables');
     Meteor.users.update({'_id': Meteor.user()._id}, {$set: { profile: {
       maxTime: 9, 
       CO2Mode: true,
@@ -65,8 +66,9 @@ Accounts.onLogin(function(){
     }}});
   }
 
-  if(!Meteor.user().profile.tables){
+  if(!Meteor.user().profile.tables || Meteor.user().profile.tables.length == 0){
     // if account created before update then profile exists but not default tables so let's insert. 
+    console.log('inserting default tables');
     Meteor.users.update({'_id': Meteor.user()._id}, {$set: {'profile.tables': defaultTables }});
   }
   Router.go('/profile');

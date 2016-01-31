@@ -26,6 +26,7 @@
 	<a id="tableElement" href="/table/{{_id}}" class="item item-icon-right">
 		<h2>{{name}}</h2>
 		<p>{{description}}</p>
+		<button id="deleteTable" data-id="{{_id}}" class="button button-assertive button-clear">Remove</button>
 		<i class="icon ion-chevron-right positive"></i>
 	</a>
 </template>
@@ -48,7 +49,7 @@
 		{{#if started}}
 			<button id='stop' class='button button-assertive icon-left ion-stop'>Stop session</button>
 		{{else}}
-			<button id='start' class='button button-balanced icon-left ion-play'>Start session</button>
+			<button id='start' class='button button-positive icon-left ion-play'>Start session</button>
 		{{/if}}
 		<div class="row">
 			<div class="col"><h2>Breathe</h2></div>
@@ -57,6 +58,10 @@
 		{{#each rows}}
 			{{> row}}
 		{{/each}}
+		<br><br>	
+		<div style="text-align: left">
+			<p>Total breath time is <b>{{table.totalBreathTime}}</b> <br> Total hold time is <b>{{table.totalHoldTime}}</b> <br> This table therefore takes <b>{{table.totalTime}}</b> </p>
+		</div>
 		<div style='height: 20px'></div>
 	</div>
 

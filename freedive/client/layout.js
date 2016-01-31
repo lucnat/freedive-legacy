@@ -15,6 +15,8 @@ Template.layout.rendered = function(){
 		seconds10.setVolume(0.0); seconds10.play();
 		seconds30 = new Media(Meteor.absoluteUrl('30seconds.mp3'));
 		seconds30.setVolume(0.0); seconds30.play();
+		finished = new Media(Meteor.absoluteUrl('finished.mp3'));
+		finished.setVolume(0.0); finished.play();
 		console.log('------------------- Audio files loaded --------------------');
 	}
 	else{
@@ -22,6 +24,7 @@ Template.layout.rendered = function(){
 		holdSound 		= new Audio('hold.mp3');
 		seconds10 		= new Audio('10seconds.mp3');
 		seconds30 		= new Audio('30seconds.mp3');
+		finished 		= new Audio('finished.mp3');
 	}
 
 	playSound = function(string){
@@ -40,6 +43,13 @@ Template.layout.rendered = function(){
 				} else if(string == '30seconds'){
 					seconds30.play();
 					seconds30.setVolume(volume/300);
+				} else if(string == 'finished'){
+					finished.play();
+					finished.setVolume(volume/300);
+					Meteor.setTimeout(function(){
+						console.log('calling again..');
+						playSound('breathe');
+					}, 1500);
 				}
 			} catch(e){}
 		}
