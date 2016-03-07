@@ -118,7 +118,7 @@ Template.createTable.events({
 		Session.set('durations', durations);
 	},
 	'click #save': function(){
-		var name = $('#name').val();
+		var name = $('#tableName').val();
 		var description = $('#description').val();
 		if(description.length <= 0){
 			description = 'Custom table';
