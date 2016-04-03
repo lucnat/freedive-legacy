@@ -1,0 +1,22 @@
+
+
+<ion-view view-title="Tables">
+
+	<!-- Navbar Buttons -->
+	<ion-nav-buttons side="right">
+		<a class="button button-clear button-icon ion-plus-round" ng-click="tables.addTable()"></a>
+	</ion-nav-buttons>
+
+	<ion-content class="has-header">
+		<div class="list">
+			<a class="item item-icon-right" ui-sref="menu.table({tableId: table._id })" ng-repeat="table in tables.tables">
+				<h2>{{table.name}}</h2>
+				<p>{{table.description}}</p>
+				<!-- <button id="deleteTable" data-id="{{table._id}}" class="button button-assertive button-clear">Remove</button> -->
+				<i class="icon ion-chevron-right positive"></i>
+			</a>
+		</div>
+	</ion-content>
+
+</ion-view>
+

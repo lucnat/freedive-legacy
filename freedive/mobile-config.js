@@ -1,7 +1,7 @@
 
 App.info({
-  id: 'freedive',
-  version: '1.7',
+  id: 'com.naterop.freedive',
+  version: '1.8',
   name: 'Freedive',
   description: 'A very simple freediving breath hold training application',
   author: 'Luca Naterop',
@@ -11,31 +11,33 @@ App.info({
 
 
 App.icons({
-  'iphone':         'resources/icons/ios/Icon.png',
-  'iphone_2x':      'resources/icons/ios/Icon-60@2x.png',
-  'ipad':           'resources/icons/ios/Icon-76.png',
-  'ipad_2x':        'resources/icons/ios/Icon-76@2x.png',
-  'android_ldpi':   'resources/icons/android/drawable-ldpi/ic_launcher.png',
-  'android_mdpi':   'resources/icons/android/drawable-mdpi/ic_launcher.png',
-  'android_hdpi':   'resources/icons/android/drawable-hdpi/ic_launcher.png',
-  'android_xhdpi':  'resources/icons/android/drawable-xhdpi/ic_launcher.png'
+  "iphone_2x": "resources/icons/iphone_2x.png", // 120x120
+  "iphone_3x": "resources/icons/iphone_3x.png", // 180x180
+  "ipad": "resources/icons/ipad.png", // 76x76
+  "ipad_2x": "resources/icons/ipad_2x.png", // 152x152
+  'android_mdpi': "resources/icons/android_mdpi.png", // 48x48
+  'android_hdpi': "resources/icons/android_hdpi.png", // 72x72
+  'android_xhdpi': "resources/icons/android_xhdpi.png" // 96x96
 });
-
-
 
 App.launchScreens({
-  // iOS  
-  'iphone':               'resources/splash/ios/iphone_2x.png',
-  'iphone_2x':            'resources/splash/ios/iphone_2x.png',
-  'iphone5':              'resources/splash/ios/iphone5.png',
-  'iphone6':              'resources/splash/ios/iphone6.png',
-  'iphone6p_portrait':    'resources/splash/ios/iphone6p_portrait.png',
-  'iphone6p_landscape':   'resources/splash/ios/iphone6p_landscape.png',
-  'ipad_portrait':        'resources/splash/ios/ipad_portrait.png',
-  'ipad_portrait_2x':     'resources/splash/ios/ipad_portrait_2x.png',
-  'ipad_landscape':       'resources/splash/ios/ipad_landscape.png',
-  'ipad_landscape_2x':    'resources/splash/ios/ipad_landscape_2x.png'
-});
-
+  "iphone_2x": "resources/splashes/iphone_2x.png", // 640x490
+  "iphone5": "resources/splashes/iphone5.png", // 640x1136
+  "iphone6": "resources/splashes/iphone6.png", // 750x1334
+  "iphone6p_portrait": "resources/splashes/iphone6p_portrait.png", // 2208x1242
+  "iphone6p_landscape": "resources/splashes/iphone6p_landscape.png", // 2208x1242
+  "ipad_portrait": "resources/splashes/ipad_portrait.png", // 768x1024
+  "ipad_portrait_2x": "resources/splashes/ipad_portrait_2x.png", // 1536x2048
+  "ipad_landscape": "resources/splashes/ipad_landscape.png", // 1024x768
+  "ipad_landscape_2x": "resources/splashes/ipad_landscape_2x.png", // 2048x1536
+  "android_mdpi_portrait": "resources/splashes/android_mdpi_portrait.png", // 320x480
+  "android_mdpi_landscape": "resources/splashes/android_mdpi_landscape.png", // 480x320
+  "android_hdpi_portrait": "resources/splashes/android_hdpi_portrait.png", // 480x800
+  "android_hdpi_landscape": "resources/splashes/android_hdpi_landscape.png", // 800x480
+  "android_xhdpi_portrait": "resources/splashes/android_xhdpi_portrait.png", // 720x1280
+  "android_xhdpi_landscape": "resources/splashes/android_xhdpi_landscape.png" // 1280x720
+})
 
 App.accessRule('*');
+
+App.setPreference('StatusBarBackgroundColor', '#444444');

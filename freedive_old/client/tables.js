@@ -77,7 +77,7 @@ Template.table.events({
 		for(var i=0; i<countdowns.length-1; i++){
 			countdowns[i].setNext(countdowns[i+1]);
 		}
-		countdowns[0].startCountdown();
+		countdowns[0].startCountdown($scope);
 	},
 
 	'click #stop': function(){
