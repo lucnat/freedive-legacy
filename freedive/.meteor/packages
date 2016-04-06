@@ -19,11 +19,10 @@ insecure                # Allow all DB writes from clients (for prototyping)
 angular
 driftyco:ionic
 fourseven:scss
-msavin:mongol
 meteorhacks:kadira
 mobile-status-bar
 momentjs:moment
 standard-minifier-css
 standard-minifier-js
-ground:db
+ground:db@2.0.0-alpha.2
 yogiben:tts

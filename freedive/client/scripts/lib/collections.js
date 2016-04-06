@@ -5,9 +5,9 @@ Holds = new Ground.Collection('holds', {connection: null });
 
 
 Tracker.autorun(function(){
-	if(Ground.ready()){
+	//if(Ground.ready()){
 		fixtures();
-	}
+	// }
 });
 
 function fixtures(){
