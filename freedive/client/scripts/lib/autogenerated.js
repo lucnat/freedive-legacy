@@ -4,7 +4,7 @@ CO2table = function(){
 	// returns CO2 table array by acceessing profile maxTime or using default
 	var table = [];
 	try{
-		var maxTime = Users.findOne().maxTime;
+		var maxTime = User.get().maxTime;
 	} catch(e){
 		var maxTime = 9;
 	};	
@@ -35,7 +35,7 @@ O2table = function(){
 	// returns O2 table array by acceessing profile maxTime or using default
 	var table = [];
 	try{
-		var maxTime = Users.findOne().maxTime;
+		var maxTime = User.get().maxTime;
 	} catch(e){
 		var maxTime = 9;
 	};

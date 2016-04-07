@@ -87,8 +87,19 @@ LucDB = class {
 		this.set(after);
 	}
 
+	remove(id){
+		var tables = this.get();
+		for(var i=0; i<tables.length; i++){
+			if(tables[i]._id == id){
+				tables.splice(i,1);
+			}
+		}
+		this.set(tables);
+	}
+
 	count(){
 		this.dependency.changed();
 		var everything = JSON.parse(localStorage[this.label]);
+		return everything.length;
 	}
 }

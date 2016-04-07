@@ -22,10 +22,10 @@ if (Meteor.isCordova) {
 notify = function(text){
 	console.log('notifying...');
 	if(Meteor.isCordova){
-		if(Users.findOne().vibrate){
+		if(User.get().vibrate){
 			navigator.vibrate(300);
 		}
-		if(Users.findOne().mute){
+		if(User.get().mute){
 			TTS.speak(text, function() {});
 		}
 	}

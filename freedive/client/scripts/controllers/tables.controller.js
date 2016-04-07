@@ -1,5 +1,5 @@
 
-angular.module('freedive').controller('TablesController', function($scope, $reactive, $ionicModal){
+angular.module('freedive').controller('TablesController', function($scope, $reactive, $ionicModal, $ionicPopup){
 	$reactive(this).attach($scope);
 	var self = this;
 
@@ -10,6 +10,12 @@ angular.module('freedive').controller('TablesController', function($scope, $reac
 	});
 
 	self.addTable = function(){
+
+		if(Tables.count() >= 4){
+			alert('This version allows you to have a maximum of 4 tables. In the upcoming ads-free pro version, you can add an unlimited amount of tables.');
+			return;		
+		}
+
 		// open modal
 		$ionicModal.fromTemplateUrl('client/templates/modals/addTable.html', {
 			scope: 						$scope,
@@ -67,6 +73,26 @@ angular.module('freedive').controller('TablesController', function($scope, $reac
 		}
 	}
 
+	self.editingList = false;
+
+	self.editList = function(){
+		console.log('clicked on edit list');
+		self.editingList = true;
+	}
+
+	self.doneEditing = function(){
+		console.log('done');
+		self.editingList = false;
+	}
+
+	self.deleteTable = function(id){
+		$ionicPopup.confirm({
+			'title': 'Delete this table?'
+		}).then(function(res){
+			if(res){
+				Tables.remove(id);
+			}
+		});
+	}
 
 });
-

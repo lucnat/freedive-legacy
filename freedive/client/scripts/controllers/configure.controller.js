@@ -1,5 +1,5 @@
 
-angular.module('freedive').controller('ConfigureController', function($scope, $reactive){
+angular.module('freedive').controller('ConfigureController', function($scope, $reactive, $ionicPopup){
 	$reactive(this).attach($scope);
 	var self = this;
 
@@ -22,6 +22,20 @@ angular.module('freedive').controller('ConfigureController', function($scope, $r
 
 	self.down = function(){
 		self.maxTime = self.maxTime/1.0 - 10;
+	}
+
+	self.reset = function(){
+
+		$ionicPopup.confirm({
+			title: 'Reset all settings of this app?',
+		}).then(function(res){
+			if(res){
+				userFixtures();
+				tableFixtures();
+				holdFixtures();
+				document.location.href = document.location.origin;
+			}
+		});
 	}
 
 	$scope.$on('$ionicView.beforeLeave', function(){

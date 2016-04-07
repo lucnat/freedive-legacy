@@ -8,14 +8,22 @@
 	</ion-nav-buttons>
 
 	<ion-content class="has-header">
-		<div class="list">
-			<a class="item item-icon-right" ui-sref="menu.table({tableId: table._id })" ng-repeat="table in tables.tables">
+
+		<ion-list show-delete="shouldShowDelete">
+			<ion-item class="item item-icon-right" ui-sref="menu.table({tableId: table._id })" ng-repeat="table in tables.tables" ng-if="!tables.editingList">
+			    <ion-delete-button class="ion-minus-circled" ng-click="tables.deleteTable(table._id)"></ion-delete-button>
 				<h2>{{table.name}}</h2>
 				<p>{{table.description}}</p>
-				<!-- <button id="deleteTable" data-id="{{table._id}}" class="button button-assertive button-clear">Remove</button> -->
-				<i class="icon ion-chevron-right positive"></i>
-			</a>
-		</div>
+				<i class="icon ion-chevron-right positive" ng-if="!tables.editingList"></i>
+			    <ion-option-button class="button-assertive" ng-click="edit(item)">
+			      Edit
+			    </ion-option-button>
+			</ion-item>
+		</ion-list>
+		<ion-toggle toggle-class="toggle-positive" ng-model="shouldShowDelete">
+		  Edit List
+		</ion-toggle>
+		<button class="button button-full" ng-click="tables.doneEditing()" ng-if="tables.editingList">Done</button>
 	</ion-content>
 
 </ion-view>
