@@ -1,19 +1,11 @@
 
-Tables = new Ground.Collection('tables', { connection: null });
-Users = new Ground.Collection('users', {connection: null });
-Holds = new Ground.Collection('holds', {connection: null });
+Tables 	= new LucDB('tables');
+User 	= new LucDB('User');
+Holds 	= new LucDB('holds');
 
-
-Tracker.autorun(function(){
-	//if(Ground.ready()){
-		fixtures();
-	// }
-});
-
-function fixtures(){
-	// User Fixtures
-	if(!Users.findOne()){
-		console.log('Executing user fixtures...');
+function userFixtures(){
+	if(!User.get()){
+		console.log('executing user fixtures');
 		var defaultUser = {
 			'maxTime': 	90,
 			'mute': 	true,
@@ -21,16 +13,15 @@ function fixtures(){
 			'volume': 	20,
 			'notificationMarks': [30,10,5,4,3,2,1]
 		};
-
-		Users.insert(defaultUser);
+		User.set(defaultUser);
 	}
+}
 
-	if(Users.find().count() > 1){
-		Users.remove({});
-	}
+function tableFixtures(){
+	if(!Tables.get()){
 
-	// Auto-generated table fixtures
-	if(!Tables.findOne({'description': 'Auto-generated'})){
+		Tables.set([]);
+
 		console.log('Executing table fixtures');
 
 		var CO2 = {
@@ -48,8 +39,15 @@ function fixtures(){
 		Tables.insert(CO2);
 		Tables.insert(O2);
 	}
+}
 
-	if(Tables.find({'description': 'Auto-generated'}).count() > 2){
-		Tables.remove({});
+function holdFixtures(){
+	if(!Holds.get()){
+		Holds.set([]);
 	}
 }
+
+
+userFixtures();
+tableFixtures();
+holdFixtures();

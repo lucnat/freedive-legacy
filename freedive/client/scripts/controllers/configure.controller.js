@@ -3,7 +3,7 @@ angular.module('freedive').controller('ConfigureController', function($scope, $r
 	$reactive(this).attach($scope);
 	var self = this;
 
-	var user 		= Users.findOne();
+	var user 		= User.get();
 	self.maxTime 	= user.maxTime;
 	self.volume 	= user.volume;
 	self.mute 		= user.mute;
@@ -40,17 +40,25 @@ angular.module('freedive').controller('ConfigureController', function($scope, $r
 			notificationMarks.push(1);
 		}
 
-		Users.update({'_id': Users.findOne()._id}, { $set: {
+		User.set({
 			'maxTime': 	self.maxTime,
 			'volume': 	self.volume,
 			'mute': 	self.mute,
 			'vibrate': 	self.vibrate,
 			'notificationMarks': notificationMarks
 
-		}})
+		});
 
-		Tables.update({'name': 'O2 Deprivation'}, {$set: {'durations': O2table() }});
-		Tables.update({'name': 'CO2 Tolerance'}, {$set: {'durations': CO2table() }});
+		// update Tables
+		var tables = Tables.get();
+		for(var i=0; i<tables.length; i++){
+			if(tables[i].name == 'O2 Deprivation'){
+				tables[i].durations = O2table();
+			} else if(tables[i].name == 'CO2 Tolerance'){
+				tables[i].durations = CO2table();
+			}
+		}
+		Tables.set(tables);
 	});
 });
 

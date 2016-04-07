@@ -6,7 +6,7 @@ Countdown = class{
 		this.duration = durationSeconds*1000;
 		this.element = element;
 		this.next = next;
-		this.notificationMarks = Users.findOne().notificationMarks;
+		this.notificationMarks = User.get().notificationMarks;
 	}
 
 	startCountdown($scope){

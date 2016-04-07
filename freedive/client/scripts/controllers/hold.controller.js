@@ -5,7 +5,7 @@ angular.module('freedive').controller('HoldController', function($scope, $reacti
 
 	self.helpers({
 		'holds': function(){
-			return Holds.find({}, {sort: {'createdAt': -1}});
+			return Holds.get();
 		}
 	});
 

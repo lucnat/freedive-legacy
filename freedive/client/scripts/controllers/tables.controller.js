@@ -5,8 +5,7 @@ angular.module('freedive').controller('TablesController', function($scope, $reac
 
 	self.helpers({
 		'tables': function(){
-			console.log(Tables.find().fetch());
-			return Tables.find();
+			return Tables.get();
 		}
 	});
 
