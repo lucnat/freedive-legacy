@@ -1,5 +1,5 @@
 
-angular.module('freedive').controller('TableController', function($scope, $reactive, $stateParams){
+angular.module('freedive').controller('TableController', function($scope, $reactive, $stateParams, $ionicPopup){
 	$reactive(this).attach($scope);
 	var self = this;
 
@@ -24,7 +24,7 @@ angular.module('freedive').controller('TableController', function($scope, $react
 
 	self.start = function(){
 		self.started = true;
-		$($('.header-item')[0]).css('display','none')
+		$('.back-button').css('display','none');
 
 		if (Meteor.isCordova) {
 			window.plugins.insomnia.keepAwake();
@@ -44,17 +44,24 @@ angular.module('freedive').controller('TableController', function($scope, $react
 	};
 
 	self.stop = function(){
-		self.started = false;
-		$($('.header-item')[0]).css('display','')
+		$ionicPopup.confirm({
+			title: 'Stop this session?',
+		}).then(function(res){
+			if(res){
+				self.started = false;
+				$('.back-button').css('display','');
 
-		if (Meteor.isCordova) {
-			window.plugins.insomnia.allowSleepAgain();
-		}
-		try{
-			self.countdowns.forEach(function(countdown){
-				countdown.reset();
-			});
-		} catch(e) {};
+				if (Meteor.isCordova) {
+					window.plugins.insomnia.allowSleepAgain();
+				}
+				try{
+					self.countdowns.forEach(function(countdown){
+						countdown.reset();
+					});
+				} catch(e) {};
+			}
+		});
+
 	};
 
 });
