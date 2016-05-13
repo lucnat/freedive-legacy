@@ -1,7 +1,7 @@
 
 App.info({
   id: 'com.naterop.freedive',
-  version: '2.0',
+  version: '2.1',
   name: 'Freedive',
   description: 'A very simple freediving breath hold training application',
   author: 'Luca Naterop',
@@ -15,9 +15,17 @@ App.icons({
   "iphone_3x": "resources/icons/iphone_3x.png", // 180x180
   "ipad": "resources/icons/ipad.png", // 76x76
   "ipad_2x": "resources/icons/ipad_2x.png", // 152x152
-  'android_mdpi': "resources/icons/android_mdpi.png", // 48x48
-  'android_hdpi': "resources/icons/android_hdpi.png", // 72x72
-  'android_xhdpi': "resources/icons/android_xhdpi.png" // 96x96
+  "ipad_pro": "resources/icons/ipad_pro.png", // 167x167
+  "ios_settings": "resources/icons/ios_settings.png", // 29x29
+  "ios_settings_2x": "resources/icons/ios_settings_2x.png", // 58x58
+  "ios_settings_3x": "resources/icons/ios_settings_3x.png", // 87x87
+  "ios_spotlight": "resources/icons/ios_spotlight.png", // 40x40
+  "ios_spotlight_2x": "resources/icons/ios_spotlight_2x.png", // 80x80
+  "android_mdpi": "resources/icons/android_mdpi.png", // 48x48
+  "android_hdpi": "resources/icons/android_hdpi.png", // 72x72
+  "android_xhdpi": "resources/icons/android_xhdpi.png", // 96x96
+  "android_xxhdpi": "resources/icons/android_xxhdpi.png", // 144x144
+  "android_xxxhdpi": "resources/icons/android_xxxhdpi.png" // 192x192
 });
 
 App.launchScreens({
@@ -35,8 +43,11 @@ App.launchScreens({
   "android_hdpi_portrait": "resources/splashes/android_hdpi_portrait.png", // 480x800
   "android_hdpi_landscape": "resources/splashes/android_hdpi_landscape.png", // 800x480
   "android_xhdpi_portrait": "resources/splashes/android_xhdpi_portrait.png", // 720x1280
-  "android_xhdpi_landscape": "resources/splashes/android_xhdpi_landscape.png" // 1280x720
-})
+  "android_xhdpi_landscape": "resources/splashes/android_xhdpi_landscape.png", // 1280x720
+  "android_xxhdpi_portrait": "resources/splashes/android_xxhdpi_portrait.png", // 1080x1440
+  "android_xxhdpi_landscape": "resources/splashes/android_xxhdpi_landscape.png" // 1440x1080
+});
+
 
 App.accessRule('*');
 

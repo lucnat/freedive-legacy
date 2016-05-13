@@ -20,13 +20,17 @@ if (Meteor.isCordova) {
 
 
 notify = function(text){
-	console.log('notifying...');
+	console.log('notify: ' + text);
 	if(Meteor.isCordova){
 		if(User.get().vibrate){
 			navigator.vibrate(300);
 		}
 		if(User.get().mute){
-			TTS.speak(text, function() {});
+      if(device.platform == 'iOS' && device.version >= 9){
+        TTS.speak({text: text, rate: 1.56}, function() {});
+      } else {
+        TTS.speak(text, function() {});
+      }
 		}
 	}
 };

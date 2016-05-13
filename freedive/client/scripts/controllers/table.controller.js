@@ -43,25 +43,40 @@ angular.module('freedive').controller('TableController', function($scope, $react
 		self.countdowns[0].startCountdown($scope);
 	};
 
-	self.stop = function(){
-		$ionicPopup.confirm({
-			title: 'Stop this session?',
-		}).then(function(res){
-			if(res){
-				self.started = false;
-				$('.back-button').css('display','');
+	self.stopSession = function(){
+		self.started = false;
+		$('.back-button').css('display','');
 
-				if (Meteor.isCordova) {
-					window.plugins.insomnia.allowSleepAgain();
-				}
-				try{
-					self.countdowns.forEach(function(countdown){
-						countdown.reset();
-					});
-				} catch(e) {};
+		if (Meteor.isCordova) {
+			window.plugins.insomnia.allowSleepAgain();
+		}
+		try{
+			self.countdowns.forEach(function(countdown){
+				countdown.reset();
+			});
+		} catch(e) {};
+	};
+
+	self.stop = function(){
+
+		var anyCountdownsRunning = false;
+		self.countdowns.forEach(function(countdown){
+			if(countdown.isRunning){
+				anyCountdownsRunning = true;
 			}
 		});
 
+		if(anyCountdownsRunning){
+			$ionicPopup.confirm({
+				title: 'Stop this session?',
+			}).then(function(res){
+				if(res){
+					self.stopSession();
+				}
+			});
+		} else {
+			self.stopSession();
+		}
 	};
 
 });
