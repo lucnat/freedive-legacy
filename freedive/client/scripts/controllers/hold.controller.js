@@ -16,6 +16,9 @@ angular.module('freedive').controller('HoldController', function($scope, $reacti
 		$('#start').css('display', 'none');
 		$('#stop').css('display', '');
 		self.started = true;
+		if (Meteor.isCordova) {
+			window.plugins.insomnia.keepAwake();
+		}
 		self.promise = $interval(function(){
 			self.timer = self.timer + 1;
 		}, 1000)
@@ -25,6 +28,9 @@ angular.module('freedive').controller('HoldController', function($scope, $reacti
 		$('#start').css('display', '');
 		$('#stop').css('display', 'none');
 		self.started = false;
+		if (Meteor.isCordova) {
+			window.plugins.insomnia.allowSleepAgain();
+		}
 		$interval.cancel(self.promise);
 		$ionicPopup.confirm({
 			title: 'Save to history?',
