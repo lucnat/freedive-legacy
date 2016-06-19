@@ -1,0 +1,37 @@
+
+<div id="hold">
+<ion-view view-title="Hold">
+	<ion-content class="has-header">
+		<br>
+		<br>
+		<div style="text-align: center">
+			<button id="start" class="button button-large button-outline button-positive icon-left ion-play" ng-click="hold.start()">Start</button>
+			<button style="display: none" id="stop" class="button button-large button-outline button-assertive icon-left ion-stop" ng-click="hold.stop()">Stop</button>
+			<h1 style="font-family: Courier New; font-size: 70px">{{hold.timer | humanizeTime}}</h1>
+		</div>
+
+		<div ng-if="!hold.started && hold.holds.length > 0">
+			<ul class="card list">
+				<div class="item item-divider">
+					History
+				</div>
+				<div class="item" href="#" ng-repeat="hold in hold.holds">
+					{{hold.duration | humanizeTime}}
+					<span class="item-note">
+						{{hold.createdAt | humanizeDuration}} ago
+					</span>
+				</div>
+			</ul>
+		</div>
+
+		<div class="card" ng-if="hold.holds.length < 3 && !hold.started">
+			<div class="item item-text-wrap">
+				Measure your breath hold duration and save your attempts to your history. Track your progress over time. 
+			</div>
+		</div>
+
+	</ion-content>
+</ion-view>
+</div>
+
+
