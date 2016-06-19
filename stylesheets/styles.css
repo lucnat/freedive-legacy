@@ -1,3 +1,11 @@
+.screenshot {
+  border-top: 80px solid #222;
+  border-right: 10px solid #222;
+  border-bottom: 80px solid #222;
+  border-left: 10px solid #222;
+  border-radius: 40px;
+}
+
 @font-face {
   font-family: 'Noto Sans';
   font-weight: 400;
