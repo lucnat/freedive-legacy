@@ -25,7 +25,7 @@ notify = function(text){
 			navigator.vibrate(300);
 		}
 		if(User.get().mute){
-      if(device.platform == 'iOS' && device.version.split('.')[0]/1.0 >= 9){
+      if(device.platform == 'iOS'){
         TTS.speak({text: text, rate: 1.6}, function() {});
       } else {
         TTS.speak(text, function() {});
