@@ -4,8 +4,10 @@
 	<p></p>
 	<br>
 	 <div style='text-align: center'>
-		<button class='button button-positive icon-left ion-play' ng-if='!table.started' ng-click="table.start()">Start session</button>
-		<button id="stopSession" class='button button-assertive icon-left ion-stop' ng-if='table.started' ng-click="table.stop()"> Stop session </button>
+		<button class='button button-dark button-large icon-left ion-play' ng-if='!table.started' ng-click="table.start()">Start</button>
+		<button class='button button-dark button-large icon-left ion-pause' ng-if='table.started && !table.paused' ng-click="table.togglePause()">Pause</button>
+		<button class='button button-dark button-large icon-left ion-play' ng-if='table.started && table.paused' ng-click="table.togglePause()">Resume</button>
+		<button id="stopSession" class='button button-dark button-large icon-left ion-stop' ng-if='table.started' ng-click="table.stop()"> Stop session </button>
 
 		<div class="row">
 			<div class="col"><h2>Breathe</h2></div>

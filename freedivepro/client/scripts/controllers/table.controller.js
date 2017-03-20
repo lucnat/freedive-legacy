@@ -14,6 +14,7 @@ angular.module('freedive').controller('TableController', function($scope, $react
 	self.rows = rows;
 	self.table = table;
 	self.started = false;
+	self.paused = false;
 	self.totalTime = (function(){
 		var total = 0;
 		durations.forEach(function(duration){
@@ -40,8 +41,18 @@ angular.module('freedive').controller('TableController', function($scope, $react
 			self.countdowns[i].setNext(self.countdowns[i+1]);
 		}
 
-		self.countdowns[0].startCountdown($scope);
+		self.countdowns[0].startCountdown();
 	};
+
+	self.togglePause = function(){
+		self.paused = !self.paused;
+		console.log('paused: ' + self.paused);
+		self.countdowns.forEach(function(countdown){
+			if(countdown.isRunning){
+				countdown.togglePauseCountdown();
+			}
+		});
+	}
 
 	self.stopSession = function(){
 		self.started = false;

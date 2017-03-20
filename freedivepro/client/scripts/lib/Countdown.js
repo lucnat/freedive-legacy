@@ -5,12 +5,15 @@ Countdown = class{
 		this.initialDuration = durationSeconds*1000;
 		this.duration = durationSeconds*1000;
 		this.isRunning = false;
+		this.isPaused = false;
 		this.element = element;
 		this.next = next;
 		this.notificationMarks = User.get().notificationMarks;
 	}
 
 	startCountdown(){
+		var that = this;
+		that.isRunning = true;
 		console.log('start countdown ');
 		if($(this.element).hasClass('breathe')){
 			// means it is a breath countdown
@@ -21,9 +24,9 @@ Countdown = class{
 			$(this.element).css('background-color', 'rgb(255, 148, 148)');
 			notify('hold your breath');
 		}
-		var that = this;
 		that.id = Meteor.setInterval(function(){
 			that.isRunning = true;
+			if(that.isPaused) return;
 			that.duration = that.duration - 1000;
 			$(that.element).html(moment.utc(that.duration).format("mm:ss"));
 			if(that.notificationMarks.indexOf(that.duration/1000) > -1){
@@ -57,6 +60,10 @@ Countdown = class{
 		$(this.element).css('background-color', '');
 		Meteor.clearInterval(this.id);
 		this.isRunning = false;
+	}
+
+	togglePauseCountdown(){
+		this.isPaused = !this.isPaused;
 	}
 
 	setNext(next){

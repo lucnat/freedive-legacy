@@ -8,23 +8,29 @@
 	</ion-nav-buttons>
 
 	<ion-content class="has-header">
-
 		<ion-list show-delete="shouldShowDelete">
-			<ion-item class="item item-icon-right" ui-sref="menu.table({tableId: table._id })" ng-repeat="table in tables.tables" ng-if="!tables.editingList">
+			<ion-item class="item item-icon-right" ui-sref="menu.table({tableId: table._id })" ng-repeat="table in tables.tables" ng-if="table.description === 'Auto-generated'">
 			    <ion-delete-button class="ion-minus-circled" ng-click="tables.deleteTable(table._id)"></ion-delete-button>
 				<h2>{{table.name}}</h2>
 				<p>{{table.description}}</p>
-				<i class="icon ion-chevron-right positive" ng-if="!tables.editingList"></i>
-			    <ion-option-button class="button-assertive" ng-click="edit(item)">
-			      Edit
+				<i class="icon ion-chevron-right"></i>
+			</ion-item>
+			<ion-item class="item item-icon-right" ui-sref="menu.table({tableId: table._id })" ng-repeat="table in tables.tables" ng-if="table.description !== 'Auto-generated'">
+			    <ion-delete-button class="ion-minus-circled" ng-click="tables.deleteTable(table._id)"></ion-delete-button>
+				<h2>{{table.name}}</h2>
+				<p>{{table.description}}</p>
+				<i class="icon ion-chevron-right"></i>
+			    <ion-option-button class="button-dark" ng-click="tables.edit(table)">
+					Edit
+			    </ion-option-button>
+			    <ion-option-button class="button-assertive" ng-click="tables.delete(table)">
+					Delete
 			    </ion-option-button>
 			</ion-item>
 		</ion-list>
-		<ion-toggle toggle-class="toggle-positive" ng-model="shouldShowDelete">
-		  Edit List
-		</ion-toggle>
-		<button class="button button-full" ng-click="tables.doneEditing()" ng-if="tables.editingList">Done</button>
+		<p style="padding: 5px; text-align: center; color: #aaa">  
+			<i class="icon ion-ios-information"></i> Swipe custom-made tables to edit
+ 		</p>
 	</ion-content>
 
 </ion-view>
-

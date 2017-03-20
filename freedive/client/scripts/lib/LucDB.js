@@ -107,6 +107,7 @@ LucDB = class {
 	}
 
 	remove(id){
+		// removes doc with _id: id
 		var tables = this.get();
 		for(var i=0; i<tables.length; i++){
 			if(tables[i]._id == id){

@@ -19,6 +19,7 @@ angular.module('freedive').controller('HoldController', function($scope, $reacti
 	self.start = function(){
 		$('#start').css('display', 'none');
 		$('#stop').css('display', '');
+		$('.left-buttons').css('display','none');
 		self.started = true;
 		if (Meteor.isCordova) {
 			window.plugins.insomnia.keepAwake();
@@ -31,6 +32,7 @@ angular.module('freedive').controller('HoldController', function($scope, $reacti
 	self.stop = function(){
 		$('#start').css('display', '');
 		$('#stop').css('display', 'none');
+		$('.left-buttons').css('display','');
 		self.started = false;
 		if (Meteor.isCordova) {
 			window.plugins.insomnia.allowSleepAgain();
