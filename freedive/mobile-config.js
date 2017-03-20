@@ -1,12 +1,12 @@
 
 App.info({
   id: 'com.naterop.freedive',
-  version: '2.4',
+  version: '2.5',
   name: 'Freedive',
   description: 'A very simple freediving breath hold training application',
   author: 'Luca Naterop',
   email: 'luca@naterop.net',
-  website: 'freedivetrainer.com'
+  website: 'http://lucnaterop.github.io/freedive/'
 });
 
 
