@@ -1,7 +1,7 @@
 
 App.info({
   id: 'com.naterop.freedivepro',
-  version: '2.5',
+  version: '2.6',
   name: 'Freedive Pro',
   description: 'A very simple freediving breath hold training application',
   author: 'Luca Naterop',

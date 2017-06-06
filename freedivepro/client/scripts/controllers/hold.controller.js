@@ -3,6 +3,21 @@ angular.module('freedive').controller('HoldController', function($scope, $reacti
 	$reactive(this).attach($scope);
 	var self = this;
 
+	self.getCurrentBest = function(){
+		var holds = Holds.get();
+		if(holds.length == 0){
+			var currentBest = null;
+		} else {
+			var currentBest = holds[0].duration;
+			holds.forEach(hold => {
+				if(hold.duration > currentBest){
+					currentBest = hold.duration
+				}
+			});
+		}
+		return currentBest;
+	}
+
 	self.helpers({
 		'holds': function(){
 			var holds = Holds.get();
@@ -10,6 +25,9 @@ angular.module('freedive').controller('HoldController', function($scope, $reacti
 				return new Date(b.createdAt) - new Date(a.createdAt);
 			});
 			return holds;
+		},
+		'currentBest': function(){
+			return self.getCurrentBest();
 		}
 	});
 
@@ -24,8 +42,19 @@ angular.module('freedive').controller('HoldController', function($scope, $reacti
 		if (Meteor.isCordova) {
 			window.plugins.insomnia.keepAwake();
 		}
+
+		var currentBest = self.getCurrentBest();
+
 		self.promise = $interval(function(){
 			self.timer = self.timer + 1;
+			if(self.notifyOnCurrentBest && self.timer == currentBest){
+				navigator.vibrate(300);
+				console.log('VIBRATING');
+			}
+			if(self.notifyOn60Seconds && self.timer%60 == 0){
+				navigator.vibrate(300);
+				console.log('60 seconds');
+			}
 		}, 1000)
 	}
 

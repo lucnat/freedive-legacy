@@ -13,6 +13,11 @@
 		<div ng-if="!hold.started && hold.holds.length > 0">
 			<ul class="card list">
 				<div class="item item-divider">
+					Settings
+				</div>
+				<ion-toggle ng-model="hold.notifyOnCurrentBest" toggle-class="toggle-positive">Vibrate when I beat current best {{hold.currentBest | humanizeTime}}</ion-toggle>
+				<ion-toggle ng-model="hold.notifyOn60Seconds" toggle-class="toggle-positive">Vibrate every 60 seconds</ion-toggle>
+				<div class="item item-divider">
 					History
 				</div>
 				<div class="item" href="#" ng-repeat="hold in hold.holds">
