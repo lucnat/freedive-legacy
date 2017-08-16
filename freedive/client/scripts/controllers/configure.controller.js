@@ -17,11 +17,11 @@ angular.module('freedive').controller('ConfigureController', function($scope, $r
 	self.countfrom5 = user.notificationMarks.indexOf(5)  > -1;
 	
 	self.up = function(){
-		self.maxTime = self.maxTime/1.0 + 10;
+		self.maxTime = self.maxTime/1.0 + 5;
 	}
 
 	self.down = function(){
-		self.maxTime = self.maxTime/1.0 - 10;
+		self.maxTime = self.maxTime/1.0 - 5;
 	}
 
 	self.reset = function(){
