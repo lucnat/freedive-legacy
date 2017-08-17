@@ -78,9 +78,20 @@ function finished(){
 	if (Meteor.isCordova) {
 		window.plugins.insomnia.allowSleepAgain();
 	}
-	try{
+
+	// try to save to history
+	try {
+		var tableName = $($('.title-center')[0]).html();
+		console.log(tableName);
+		TablesHistory.insert({
+			'tableName': tableName,
+			'createdAt': new Date()
+		});
+	} catch(e) {}
+
+	// try to click stop
+	try {
 		$('#stopSession').click();
 	} catch(e) {};
 	alert('Session finished.');
 }
-

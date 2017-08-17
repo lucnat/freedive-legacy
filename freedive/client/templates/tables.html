@@ -31,6 +31,22 @@
 		<p style="padding: 5px; text-align: center; color: #aaa">  
 			<i class="icon ion-ios-information"></i> Swipe custom-made tables to edit
  		</p>
+
+			<ul class="card list">
+				<div class="item item-divider">
+					History
+				</div>
+				<div class="item" href="#" ng-repeat="element in tables.tablesHistory">
+					{{element.tableName}}
+					<span class="item-note">
+						{{element.createdAt | humanizeDuration}} ago
+					</span>
+				</div>
+				<div class="item" ng-if="tables.tablesHistory.length == 0">
+					Nothing here yet..
+				</div>
+			</ul>
+
 	</ion-content>
 
 </ion-view>

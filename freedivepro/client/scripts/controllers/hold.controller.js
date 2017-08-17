@@ -35,6 +35,7 @@ angular.module('freedive').controller('HoldController', function($scope, $reacti
 	self.started = false;
 
 	self.start = function(){
+
 		$('#start').css('display', 'none');
 		$('#stop').css('display', '');
 		$('.left-buttons').css('display','none');
@@ -47,13 +48,13 @@ angular.module('freedive').controller('HoldController', function($scope, $reacti
 
 		self.promise = $interval(function(){
 			self.timer = self.timer + 1;
-			if(self.notifyOnCurrentBest && self.timer == currentBest){
+			if(self.vibrateOnCurrentBestEnabled && self.timer == currentBest){
 				navigator.vibrate(300);
-				console.log('VIBRATING');
+				console.log('VIBRATING...');
 			}
-			if(self.notifyOn60Seconds && self.timer%60 == 0){
+			if(self.vibrateEveryEnabled && self.timer%self.vibrateEvery == 0){
 				navigator.vibrate(300);
-				console.log('60 seconds');
+				console.log('VIBRATING...');
 			}
 		}, 1000)
 	}

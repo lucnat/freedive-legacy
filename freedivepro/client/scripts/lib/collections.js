@@ -1,7 +1,8 @@
 
-Tables 	= new LucDB('tables');
-User 	= new LucDB('User');
-Holds 	= new LucDB('holds');
+Tables 			= new LucDB('tables');
+TablesHistory 	= new LucDB('tablesHistory');
+User 			= new LucDB('User');
+Holds 			= new LucDB('holds');
 
 userFixtures = function(){
 	console.log('executing user fixtures');
@@ -36,6 +37,10 @@ tableFixtures = function(){
 	Tables.insert(O2);
 }
 
+tablesHistoryFixtures = function(){
+	TablesHistory.set([]);
+}
+
 holdFixtures = function(){
 	Holds.set([]);
 }
@@ -46,6 +51,10 @@ if(!User.get()){
 
 if(!Tables.get()){
 	tableFixtures();
+}
+
+if(!TablesHistory.get()){
+	tablesHistoryFixtures();
 }
 
 if(!Holds.get()){

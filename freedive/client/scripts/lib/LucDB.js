@@ -1,18 +1,20 @@
 /*
 
- ------- API for singletons and collections -------
+	 ------- shared API -------
 
- LucDB(label) 		creates new DB with label
- set(obj)		sets entire DB to obj
- get() 			returns all in DB
- 
- ------- API for collections only ------
+	 LucDB(label) 		creates new DB with label
+	 get() 			returns all in DB
 
- find(selector) 	find documents matching selector (not yet implemented, currently returns everything)
- findOne(id) 		find one document with id
- update(id, obj) 	updates document with id to obj
- insert(obj) 		inserts new obj to DB
- remove(id)		removes document with id
+	 -------- API for singletons --------
+	 set(obj)		sets entire DB to obj
+
+	 ------- API for collections only ------
+
+	 find(selector) 	find documents matching selector (not yet implemented, currently returns everything)
+	 findOne(id) 		find one document with id
+	 update(id, obj) 	updates document with id to obj
+	 insert(obj) 		inserts new obj to DB
+	 remove(id)		removes document with id
 
 */
 

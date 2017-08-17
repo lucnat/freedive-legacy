@@ -6,6 +6,9 @@ angular.module('freedive').controller('TablesController', function($scope, $reac
 	self.helpers({
 		'tables': function(){
 			return Tables.get();
+		},
+		'tablesHistory': function(){
+			return TablesHistory.get();
 		}
 	});
 

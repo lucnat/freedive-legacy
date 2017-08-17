@@ -5,18 +5,40 @@
 		<br>
 		<br>
 		<div style="text-align: center">
-			<button id="start" class="button button-large button-outline button-positive icon-left ion-play" ng-click="hold.start()">Start</button>
-			<button style="display: none" id="stop" class="button button-large button-outline button-assertive icon-left ion-stop" ng-click="hold.stop()">Stop</button>
+			<button id="start" class="button button-dark button-large icon-left ion-play" ng-click="hold.start()">Start</button>
+			<button style="display: none" id="stop" class="button button-dark button-large icon-left ion-stop" ng-click="hold.stop()">Stop</button>
 			<h1 style="font-family: Courier New; font-size: 70px">{{hold.timer | humanizeTime}}</h1>
 		</div>
 
-		<div ng-if="!hold.started && hold.holds.length > 0">
+		<div ng-if="!hold.started">
 			<ul class="card list">
 				<div class="item item-divider">
 					Settings
 				</div>
-				<ion-toggle ng-model="hold.notifyOnCurrentBest" toggle-class="toggle-positive">Vibrate when I beat current best {{hold.currentBest | humanizeTime}}</ion-toggle>
-				<ion-toggle ng-model="hold.notifyOn60Seconds" toggle-class="toggle-positive">Vibrate every 60 seconds</ion-toggle>
+				<span class="item" style="padding: 0; padding-bottom: 15px" ng-if="hold.holds.length > 0">
+					<ion-toggle style="border-bottom: none;" ng-model="hold.vibrateOnCurrentBestEnabled" toggle-class="toggle-positive">Vibrate when I </ion-toggle>
+					<span style="margin-left: 15px;">
+						beat my current best {{hold.currentBest | humanizeTime}}
+					</span>
+
+				</span>
+				<span class="item" style="padding: 0; padding-bottom: 15px">
+					<ion-toggle style="border-bottom: none; " ng-model="hold.vibrateEveryEnabled" toggle-class="toggle-positive">Vibrate every </ion-toggle>
+					<span style="margin-left: 15px;">
+						<select ng-model="hold.vibrateEvery" style="display:inline; margin: 0px; margin-top: 5px">
+							<option>10</option>
+							<option>20</option>
+							<option ng-selected="true">30</option>
+							<option>60</option>
+							<option>120</option>
+							<option>180</option>
+						</select> seconds 
+					</span>
+ 
+				</span>
+
+			</ul>
+			<ul class="card list">
 				<div class="item item-divider">
 					History
 				</div>
@@ -26,6 +48,9 @@
 						{{hold.createdAt | humanizeDuration}} ago
 					</span>
 				</div>
+				<div class="item" ng-if="hold.holds.length == 0">
+					Nothing here yet..
+				</div>
 			</ul>
 		</div>
 
@@ -34,6 +59,7 @@
 				Measure your breath hold duration and save your attempts to your history. Track your progress over time. 
 			</div>
 		</div>
+		<div style="height: 50px"></div>
 
 	</ion-content>
 </ion-view>
