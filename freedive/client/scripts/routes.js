@@ -53,12 +53,12 @@ function addTopLevelRoutes($stateProvider){
 	});
 	
 	// concrete
-	$stateProvider.state('menu.configure', {
-		url: '/configure',
+	$stateProvider.state('menu.settings', {
+		url: '/settings',
 		views: {
 			'menuContent': {
-				templateUrl: 'client/templates/configure.html',
-				controller: 'ConfigureController as configure'
+				templateUrl: 'client/templates/settings.html',
+				controller: 'SettingsController as settings'
 			}
 		}
 	});

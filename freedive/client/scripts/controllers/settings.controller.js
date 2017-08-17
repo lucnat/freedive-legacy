@@ -1,5 +1,5 @@
 
-angular.module('freedive').controller('ConfigureController', function($scope, $reactive, $ionicPopup){
+angular.module('freedive').controller('SettingsController', function($scope, $reactive, $ionicPopup){
 	$reactive(this).attach($scope);
 	var self = this;
 

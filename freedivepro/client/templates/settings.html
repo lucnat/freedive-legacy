@@ -1,0 +1,65 @@
+
+
+<ion-view view-title="Settings">
+	<ion-content class="has-header">
+
+		<div class="padding">
+			<h3> Maximum breath hold time</h3>
+			<p>The O<sub>2</sub> Deprivation table and the CO<sub>2</sub> Tolerance table are populated via the Maximum Breath Hold Time.</p>
+			<p>Find out your Maximum Breath Hold Time
+				<ul class="bullet-list">
+				  <li>Access the <b>MENU</b></li>
+				  <li>Select <b>HOLD</b></li>
+				  <li>Hold your breath and tap on <b>START</b></li>
+				</ul>
+			</p>
+		</div>
+		
+		<div style="text-align: center">
+			<h1 style="font-family: Courier New; font-size: 70px">{{settings.maxTime | humanizeTime}}</h1>
+		</div>
+
+		<div style="text-align: center">
+			<a class="button button-icon icon ion-arrow-up-b" ng-click="settings.up()"></a>
+			<div class="range range-positive">
+				<input type="range" name="volume" min="20" max="480" step="5" ng-model="settings.maxTime">
+			</div>
+			<a class="button button-icon icon ion-arrow-down-b" ng-click="settings.down()"></a>
+		</div>
+
+		<div class="padding">
+			<h3>Notifications</h3>
+			<p>Your goal is maximum relaxation. Reduce the notifications to a minimum. If you mute the application and use vibration only, you can keep your eyes closed and reduce distraction to a minimum. You can set verbal time reminders if you prefer. Adjust the options to your preference. </p>
+		</div>
+
+		<!--
+		<div class="range range-positive">
+			<i class="icon ion-volume-low"></i>
+				<input id='volume' type="range" name="volume" ng-model="settings.volume">
+			<i class="icon ion-volume-high"></i>
+		</div>
+		-->
+		
+		<div class="card list">			
+			<div class="item item-divider">Type</div>
+			<ion-toggle ng-model="settings.mute" toggle-class="toggle-positive">Voice</ion-toggle>
+			<ion-toggle ng-model="settings.vibrate" toggle-class="toggle-positive">Vibrate</ion-toggle>
+			<div class="item item-divider">When?</div>
+			<ion-toggle ng-model="settings.sec60" toggle-class="toggle-positive">60 seconds</ion-toggle>
+			<ion-toggle ng-model="settings.sec45" toggle-class="toggle-positive">45 seconds</ion-toggle>
+			<ion-toggle ng-model="settings.sec30" toggle-class="toggle-positive">30 seconds</ion-toggle>
+			<ion-toggle ng-model="settings.sec15" toggle-class="toggle-positive">15 seconds</ion-toggle>
+			<ion-toggle ng-model="settings.sec10" toggle-class="toggle-positive">10 seconds</ion-toggle>
+			<ion-toggle ng-model="settings.countfrom5" toggle-class="toggle-positive">count down from 5 seconds</ion-toggle>
+		</div>
+
+		<div class="padding">
+			<h3>Reset</h3>
+			<p>The reset bar below erases everything and returns the app in the original delivery state. Personalized settings, data stored in the history, and personal tables will be deleted.</p>
+		</div>
+		<button class="button button-full button-assertive" ng-click="settings.reset()">Reset</button>
+		<br>
+	</ion-content>
+</ion-view>
+
+
