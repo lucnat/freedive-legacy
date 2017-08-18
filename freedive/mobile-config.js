@@ -6,6 +6,7 @@ App.info({
   description: 'A very simple freediving breath hold training application',
   author: 'Luca Naterop',
   email: 'luca@naterop.net',
+  buildNumber: '207000',
   website: 'http://lucnaterop.github.io/freedive/'
 });
 
