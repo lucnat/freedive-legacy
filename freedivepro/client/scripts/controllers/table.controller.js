@@ -1,5 +1,5 @@
 
-angular.module('freedive').controller('TableController', function($scope, $reactive, $stateParams, $ionicPopup){
+angular.module('freedive').controller('TableController', function($scope, $reactive, $stateParams, $ionicPlatform, $ionicPopup, $ionicHistory){
 	$reactive(this).attach($scope);
 	var self = this;
 
@@ -23,9 +23,27 @@ angular.module('freedive').controller('TableController', function($scope, $react
 		return total;
 	})();
 
+	self.preventGoingBack = function() {
+		// disables back button, and android hardware back button. Swipe back was disabled for this view statically.
+		$('.back-button').css('display','none');
+
+		$ionicPlatform.registerBackButtonAction(function (event) {
+		    event.preventDefault();
+		}, 100);
+	}
+
+	self.undoPreventGoingBack = function() {
+		// undo disable going back
+		$('.back-button').css('display','');
+
+		$ionicPlatform.registerBackButtonAction(function (event) {
+		    $ionicHistory.goBack();
+		}, 100);
+	}
+
 	self.start = function(){
 		self.started = true;
-		$('.back-button').css('display','none');
+		self.preventGoingBack();
 
 		if (Meteor.isCordova) {
 			window.plugins.insomnia.keepAwake();
@@ -56,7 +74,7 @@ angular.module('freedive').controller('TableController', function($scope, $react
 
 	self.stopSession = function(){
 		self.started = false;
-		$('.back-button').css('display','');
+		self.undoPreventGoingBack();
 
 		if (Meteor.isCordova) {
 			window.plugins.insomnia.allowSleepAgain();
