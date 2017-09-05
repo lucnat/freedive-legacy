@@ -6,17 +6,28 @@
     </ion-header-bar>
 
     <ion-content class="padding">
-		<div class="list">
 
+		<div class="list">
+			<div class="item item-icon-left item-body" style="padding-top: 0px">
+				<i class="icon ion-information"></i>
+				<p style="margin-left: 40px">
+					<b>About static tables</b> <br>
+					Static tables have breathe and hold durations which are fixed. In order to create a static table, simply enter all durations individually below. 
+				</p>
+			</div>
+		</div>
+
+		<div class="list">
+			
 			<label class="item item-input">
 				<input id='tableName' type="text" placeholder="Enter a name for the table" ng-model="tableName"><br>
 			</label>
-
+			
 			<div class="table">
 				<div class="row">
 					<div class="col">Breathe</div><div class="col ">Hold</div>
 				</div>
-
+				
 				<div class="row" ng-repeat="i in getNumber(amountOfRows) track by $index">
 					<div class="col">
 						<label class="item item-input"><input class="duration" type="number" placeholder="seconds" max="1800"></label>

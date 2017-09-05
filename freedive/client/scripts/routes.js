@@ -31,12 +31,23 @@ function addTopLevelRoutes($stateProvider){
 	});
 
 	// concrete
-	$stateProvider.state('menu.table', {
-		url: '/table/:tableId',
+	$stateProvider.state('menu.staticTable', {
+		url: '/staticTable/:tableId',
 		views: {
 			'menuContent': {
-				templateUrl: 'client/templates/table.html',
-				controller: 'TableController as table'
+				templateUrl: 'client/templates/staticTable.html',
+				controller: 'StaticTableController as table'
+			}
+		}
+	});
+
+	// concrete
+	$stateProvider.state('menu.dynamicTable', {
+		url: '/dynamicTable/:tableId',
+		views: {
+			'menuContent': {
+				templateUrl: 'client/templates/dynamicTable.html',
+				controller: 'DynamicTableController as table'
 			}
 		}
 	});

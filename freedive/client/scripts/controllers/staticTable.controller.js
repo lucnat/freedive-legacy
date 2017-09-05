@@ -1,5 +1,5 @@
 
-angular.module('freedive').controller('TableController', function($scope, $reactive, $stateParams, $ionicPlatform, $ionicPopup, $ionicHistory){
+angular.module('freedive').controller('StaticTableController', function($scope, $reactive, $stateParams, $ionicPlatform, $ionicPopup, $ionicHistory){
 	$reactive(this).attach($scope);
 	var self = this;
 
