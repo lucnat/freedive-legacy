@@ -1,12 +1,12 @@
 
 App.info({
   id: 'com.naterop.freedivepro',
-  version: '2.7.1',
+  version: '2.8.1',
   name: 'Freedive Pro',
   description: 'A very simple freediving breath hold training application',
   author: 'Luca Naterop',
   email: 'luca@naterop.net',
-  buildNumber: '207010',
+  buildNumber: '208010',
   website: 'http://lucnaterop.github.io/freedive/'
 });
 
